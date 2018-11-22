@@ -10,9 +10,9 @@
 <h:body>
 	<h:form>
 		<h:panelGrid columns="2">
-			Login :<p:inputText value="#{aMB.login}" />
+			Login :<h:inputText value="#{aMB.login}" />
 			
-			mdp : <p:inputSecret value="#{aMB.password}" />
+			mdp : <h:inputSecret value="#{aMB.password}" />
 
 			<p:commandButton value="Se connecter" action="#{aMB.loginAdmin}" ajax="false"/>
 		</h:panelGrid>

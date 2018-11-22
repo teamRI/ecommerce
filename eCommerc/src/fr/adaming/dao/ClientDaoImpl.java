@@ -20,20 +20,27 @@ public class ClientDaoImpl implements IClientDao{
 
 	@Override
 	public Client upDateClient(Client cl) {
-		// TODO Auto-generated method stub
-		return null;
+		em.find(Client.class, cl.getId());
+		em.merge(cl);
+		return cl;
 	}
 
 	@Override
 	public int deleteClient(Client cl) {
-		// TODO Auto-generated method stub
+		try{
+			Client clOut=em.find(Client.class, cl.getId());
+			em.remove(clOut);
+			return 1;
+			}catch (Exception ex){
+				
+			}
 		return 0;
 	}
 
 	@Override
 	public Client getClient(Client cl) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return em.find(Client.class, cl.getId());
 	}
 
 }

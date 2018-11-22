@@ -20,20 +20,20 @@ public class ClientServiceImpl implements IClientService{
 
 	@Override
 	public Client upDateClient(Client cl) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return clDao.upDateClient(cl);
 	}
 
 	@Override
 	public int deleteClient(Client cl) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return clDao.deleteClient(cl);
 	}
 
 	@Override
 	public Client getClient(Client cl) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return clDao.getClient(cl);
 	}
 
 	

@@ -1,6 +1,5 @@
 package fr.adaming.managedBean;
 
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,28 +15,28 @@ import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.service.IClientService;
 
-@ManagedBean(name="clMB")
+@ManagedBean(name = "clMB")
 @RequestScoped
-public class ClientManagedBean implements Serializable{
+public class ClientManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	private IClientService clSer;
-	
+
 	private Client cl;
 	private List<LigneCommande> pannier;
 	private Commande co;
-	
+
 	public ClientManagedBean() {
 		super();
 	}
-	
+
 	@PostConstruct
 	public void init() {
-		this.cl=new Client();
-		this.co=new Commande();
-		
+		this.cl = new Client();
+		this.co = new Commande();
+
 	}
 
 	public Client getCl() {
@@ -63,15 +62,48 @@ public class ClientManagedBean implements Serializable{
 	public void setCo(Commande co) {
 		this.co = co;
 	}
-	
+
 	public String addClient() {
-		Client clOut=clSer.addClient(this.cl);
-		if(clOut!=null) {
+		Client clOut = clSer.addClient(this.cl);
+		if (clOut != null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été ajouté!"));
 			return "addclient";
-		}else {
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
 			return "adclient";
+		}
+	}
+
+	public String upDateClient() {
+		Client clOut = clSer.upDateClient(cl);
+		if (clOut != null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été modifier!"));
+			return "updateclient";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
+			return "updateclient";
+		}
+	}
+
+	public String getClient() {
+		Client clOut = clSer.getClient(cl);
+		if (clOut != null) {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("clSession", clOut);
+			return "getclient";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
+			return "getclient";
+		}
+	}
+	
+	public String deleteClient() {
+		int verif = clSer.deleteClient(cl);
+		if (verif != 0) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été supprimé!"));
+			return "deleteclient";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
+			return "deleteclient";
 		}
 	}
 }
