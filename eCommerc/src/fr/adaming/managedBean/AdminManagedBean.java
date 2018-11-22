@@ -53,11 +53,11 @@ public class AdminManagedBean implements Serializable{
 				
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("verifSession", true);
 			
-				return "accueil";
+				return "acceuil";
 				
 			}else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le login ou mot de passe erroné(s)"));
-				return "login";
+				return "acceuil";
 			}
 		
 
@@ -66,7 +66,7 @@ public class AdminManagedBean implements Serializable{
 		public String logoutAdmin() {
 			
 			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-			return "login";
+			return "acceuil";
 		}
 		}
 		

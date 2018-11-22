@@ -91,7 +91,7 @@ public class CategorieManagedBean implements Serializable{
 			List<Categorie> list= catService.getAllCategorie();
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listCategorie", list)	;
 		
-		return "accueil";
+		return "acceuil";
 		
 			
 		}else {

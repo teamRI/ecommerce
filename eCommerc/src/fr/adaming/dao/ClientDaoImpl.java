@@ -9,7 +9,7 @@ import fr.adaming.model.Client;
 @Stateless
 public class ClientDaoImpl implements IClientDao{
 
-	@PersistenceContext(unitName = "pu_tp")
+	@PersistenceContext(unitName = "eCommerc")
 	private EntityManager em;
 	
 	@Override

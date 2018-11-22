@@ -16,8 +16,8 @@ public class CategorieServiceImpl implements ICategorieService{
 
 	@Override
 	public List<Categorie> getAllCategorie() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return catDao.getAllCategorie();
 	}
 
 	@Override

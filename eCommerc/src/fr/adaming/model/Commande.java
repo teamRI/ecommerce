@@ -23,7 +23,7 @@ public class Commande {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_com")
+	@Column(name = "id_co")
 	private Long id;
 	private Date dateCommande;
 
