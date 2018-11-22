@@ -1,71 +1,72 @@
 package fr.adaming.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="commandes")
+@Table(name = "commandes")
 public class Commande {
-  
-	
-	//1************************ATTRIBUTS***************************************************
-	
-	
+
+	// 1************************ATTRIBUTS***************************************************
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_com")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_com")
 	private Long id;
 	private Date dateCommande;
+
+	@ManyToOne
+	@JoinColumn(name = "cl_id", referencedColumnName = "id_cl")
+	private Client cl;
 	
-	
-	//2*************CONSTRUCTEURS***************************************************************
-	
-	
+	@OneToMany(mappedBy="co",cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+	private List<LigneCommande> listelco;
+	// 2*************CONSTRUCTEURS***************************************************************
+
 	public Commande() {
 		super();
 	}
-	
+
 	public Commande(Date dateCommande) {
 		super();
 		this.dateCommande = dateCommande;
 	}
-	
-	
+
 	public Commande(Long id, Date dateCommande) {
 		super();
 		this.id = id;
 		this.dateCommande = dateCommande;
 	}
 
-	//3*****************************GETTERS AND SETTERS*******************************************************
-	
+	// 3*****************************GETTERS AND
+	// SETTERS*******************************************************
+
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public Date getDateCommande() {
 		return dateCommande;
 	}
 
-
 	public void setDateCommande(Date dateCommande) {
 		this.dateCommande = dateCommande;
 	}
-	
-	
-	
-	
-	
+
 }

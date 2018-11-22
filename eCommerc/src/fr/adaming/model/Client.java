@@ -1,10 +1,15 @@
 package fr.adaming.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +26,9 @@ public class Client {
 	private String adresse;
 	private String email;
 	private String tel;
+	
+	@OneToMany(mappedBy="cl",cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+	private List<Commande> listeCo;
 	
 	//2*************CONSTRUCTEURS***************************************************************
 	
