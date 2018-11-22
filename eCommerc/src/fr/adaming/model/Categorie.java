@@ -1,9 +1,15 @@
 package fr.adaming.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,10 +20,17 @@ public class Categorie {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_cat")
 	private long id;
 	private String nomCat;
 	private byte photo;
 	private String description;
+	
+	 //1.1******************Relations*****************************
+	  
+	@OneToMany(mappedBy="pCategorie",cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+	  private List<Produit> listeProduit;
+	  
 	
 	
 	//2*************CONSTRUCTEURS***************************************************************

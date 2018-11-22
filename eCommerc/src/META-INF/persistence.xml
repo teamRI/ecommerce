@@ -12,7 +12,6 @@
 	<class>fr.adaming.model.Commande</class>
 	<class>fr.adaming.model.Categorie</class>
 	<class>fr.adaming.model.Client</class>
-	<class>fr.adaming.model.Employe</class>
 		
 		
 		<!-- Declarer les props de hibernate -->

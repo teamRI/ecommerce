@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="eCommerc">
+	
+	<!-- Declaration de l'objet DataSource deployé sur le serveur que encapsule les infos de la connexion à la BD -->
+	
+	
+	<jta-data-source>java:/ecommerce</jta-data-source>
+	
+	<!-- Ennummerer les classes persistantes -->
+	<class>fr.adaming.model.Produit</class>
+	<class>fr.adaming.model.Commande</class>
+	<class>fr.adaming.model.Categorie</class>
+	<class>fr.adaming.model.Client</class>
+		
+		
+		<!-- Declarer les props de hibernate -->
+		
+		<properties>
+		<property name="hibernate.hbm2ddl.auto" value="update"/>
+		<property name="hibernate.show_sql" value="true"/>
+		</properties>
 	</persistence-unit>
 </persistence>

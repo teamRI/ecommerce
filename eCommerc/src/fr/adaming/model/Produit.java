@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +26,12 @@ public class Produit {
 	private boolean selectionne;
 	private byte photo;
 	
+	
+	   //1.1******************Relations*****************************
+	
+	   @ManyToOne
+	   @JoinColumn(name="cat_id",referencedColumnName="id_cat")
+       private Categorie pCategorie;
 	
 	//2*************CONSTRUCTEURS***************************************************************
 	
@@ -126,6 +134,16 @@ public class Produit {
 
 	public void setPhoto(byte photo) {
 		this.photo = photo;
+	}
+
+
+	public Categorie getpCategorie() {
+		return pCategorie;
+	}
+
+
+	public void setpCategorie(Categorie pCategorie) {
+		this.pCategorie = pCategorie;
 	}
 	
 	
