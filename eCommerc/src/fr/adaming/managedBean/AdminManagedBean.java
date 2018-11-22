@@ -1,0 +1,73 @@
+package fr.adaming.managedBean;
+
+import java.io.Serializable;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+
+@ManagedBean(name="aMB")
+@SessionScoped
+public class AdminManagedBean implements Serializable{
+	
+	//1************************ATTRIBUTS***********************************************************************************
+	
+	private String login;
+	
+	private String password;
+
+
+	
+	//2*************************************CONSTRUCTEUR VIDE**************************************************************
+	
+		public AdminManagedBean() {
+		super();
+	}
+		
+		
+	//4************************************GETTERS AND SETTERS**********************************************************	
+		public String getLogin() {
+			return login;
+		}
+
+		public void setLogin(String login) {
+			this.login = login;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+		
+	//5*****************************************AUTRES METHODES*************************************************************
+		
+		public String loginAdmin() {
+			
+			if(login.equals(password.equals("admin"))) {
+				
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("verifSession", true);
+			
+				return "accueil";
+				
+			}else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le login ou mot de passe erroné(s)"));
+				return "login";
+			}
+		
+
+			}
+		
+		public String logoutAdmin() {
+			
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			return "login";
+		}
+		}
+		
+

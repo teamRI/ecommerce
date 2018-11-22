@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +34,9 @@ public class Produit {
 	   @ManyToOne
 	   @JoinColumn(name="cat_id",referencedColumnName="id_cat")
        private Categorie pCategorie;
+	   
+	   @OneToOne(mappedBy="pr")
+	   private LigneCommande pLigneCommande;
 	
 	//2*************CONSTRUCTEURS***************************************************************
 	
