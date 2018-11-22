@@ -5,15 +5,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Page d'Acceuil</title>
+<title>Insert title here</title>
 </h:head>
 <h:body>
-	<h:form>
-		<ui:insert name="monLayout">
-			<ui:include src="/ressources/template/template.xhtml"></ui:include>
+<div style="height: 150px">
+		<!-- inserer le header sans modifier son contenu -->
+		<ui:insert name="header">
+			<!-- inclure concretement le header -->
+			<ui:include src="/ressources/template/header.xhtml"></ui:include>
 		</ui:insert>
-	</h:form>
-
-
+	</div>
 </h:body>
 </html>

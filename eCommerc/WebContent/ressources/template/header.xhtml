@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>header</title>
+</h:head>
+<h:body>
+	<ui:composition>
+		<p:inputText style="position: relative; left:30%"></p:inputText>
+		<p:commandButton style="position: relative; left:30%" value="search"
+			action="#" />
+		<p:commandButton style="position: relative; left:65%"
+			value="Administrateur" action="/login" />
+		<p:commandLink style="position: relative; left:60%; top: 50px"
+			value="pannier" action="#" />
+		<p:megaMenu style="position: relative; top:50px; margin-top:20px"
+			orientation="horizontal">
+			<p:submenu label="cat1" icon="pi pi-check">
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="produit1.1" url="#" />
+						<p:menuitem value="produit1.2" url="#" />
+						<p:menuitem value="produit1.3" url="#" />
+						<p:menuitem value="produit1.4" url="#" />
+						<p:menuitem value="produit1.5" url="#" />
+					</p:submenu>
+				</p:column>
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="produit2.1" url="#" />
+						<p:menuitem value="produit2.2" url="#" />
+						<p:menuitem value="produit2.3" url="#" />
+						<p:menuitem value="produit2.4" url="#" />
+						<p:menuitem value="produit2.5" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="cat2" icon="pi pi-check">
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="produit1.1" url="#" />
+						<p:menuitem value="produit1.2" url="#" />
+						<p:menuitem value="produit1.3" url="#" />
+						<p:menuitem value="produit1.4" url="#" />
+						<p:menuitem value="produit1.5" url="#" />
+					</p:submenu>
+				</p:column>
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="produit2.1" url="#" />
+						<p:menuitem value="produit2.2" url="#" />
+						<p:menuitem value="produit2.3" url="#" />
+						<p:menuitem value="produit2.4" url="#" />
+						<p:menuitem value="produit2.5" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="cat3" icon="pi pi-check">
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="produit1.1" url="#" />
+						<p:menuitem value="produit1.2" url="#" />
+						<p:menuitem value="produit1.3" url="#" />
+						<p:menuitem value="produit1.4" url="#" />
+						<p:menuitem value="produit1.5" url="#" />
+					</p:submenu>
+				</p:column>
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="produit2.1" url="#" />
+						<p:menuitem value="produit2.2" url="#" />
+						<p:menuitem value="produit2.3" url="#" />
+						<p:menuitem value="produit2.4" url="#" />
+						<p:menuitem value="produit2.5" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="cat4" icon="pi pi-check">
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="produit1.1" url="#" />
+						<p:menuitem value="produit1.2" url="#" />
+						<p:menuitem value="produit1.3" url="#" />
+						<p:menuitem value="produit1.4" url="#" />
+						<p:menuitem value="produit1.5" url="#" />
+					</p:submenu>
+				</p:column>
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="produit2.1" url="#" />
+						<p:menuitem value="produit2.2" url="#" />
+						<p:menuitem value="produit2.3" url="#" />
+						<p:menuitem value="produit2.4" url="#" />
+						<p:menuitem value="produit2.5" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Administrateur" icon="pi pi-check"
+				rendered="#{sessionScope.verifSession}">
+				<p:column>
+					<p:submenu label="client">
+						<p:menuitem value="ajouter" url="addclient.xhtml" />
+						<p:menuitem value="supprimer" url="#" />
+						<p:menuitem value="modifier" url="#" />
+						<p:menuitem value="chercher" url="#" />
+					</p:submenu>
+				</p:column>
+				<p:column>
+					<p:submenu label="commande">
+						<p:menuitem value="ajouter" url="#" />
+						<p:menuitem value="supprimer" url="#" />
+						<p:menuitem value="modifier" url="#" />
+						<p:menuitem value="chercher" url="#" />
+						<p:menuitem value="afficher tous" url="#" />
+					</p:submenu>
+				</p:column>
+				<p:column>
+					<p:submenu>
+						<p:menuitem value="Deconnexion" icon="pi pi-times"
+							action="#{aMB.logoutAdmin}" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+		</p:megaMenu>
+	</ui:composition>
+</h:body>
+</html>

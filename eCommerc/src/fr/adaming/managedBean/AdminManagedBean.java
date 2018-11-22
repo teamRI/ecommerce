@@ -2,7 +2,6 @@ package fr.adaming.managedBean;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,7 +12,9 @@ import javax.faces.context.FacesContext;
 public class AdminManagedBean implements Serializable{
 	
 	//1************************ATTRIBUTS***********************************************************************************
-	
+
+	private static final long serialVersionUID = 1L;
+
 	private String login;
 	
 	private String password;
@@ -49,7 +50,7 @@ public class AdminManagedBean implements Serializable{
 		
 		public String loginAdmin() {
 			
-			if(login.equals(password.equals("admin"))) {
+			if(login.equals("admin") && password.equals("admin")) {
 				
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("verifSession", true);
 			
@@ -57,7 +58,7 @@ public class AdminManagedBean implements Serializable{
 				
 			}else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le login ou mot de passe erroné(s)"));
-				return "acceuil";
+				return "login";
 			}
 		
 

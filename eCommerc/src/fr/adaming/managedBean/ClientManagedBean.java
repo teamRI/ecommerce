@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
@@ -65,9 +67,11 @@ public class ClientManagedBean implements Serializable{
 	public String addClient() {
 		Client clOut=clSer.addClient(this.cl);
 		if(clOut!=null) {
-			return "success";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été ajouté!"));
+			return "addclient";
 		}else {
-			return "fail";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+			return "adclient";
 		}
 	}
 }
