@@ -33,6 +33,9 @@ public class CategorieManagedBean implements Serializable{
 
 	HttpSession adminSession;
 	
+	private UploadedFile file;
+	
+	
 	//3*************************************CONSTRUCTEUR VIDE**************************************************************
 	
 	public CategorieManagedBean() {
@@ -78,10 +81,18 @@ public class CategorieManagedBean implements Serializable{
 	}
 	
 	
+	
 	//6*****************************************AUTRES METHODES*************************************************************
 	
 	
 	
+
+	public String getAllCategorie() {
+		List<Categorie> listOut= catService.getAllCategorie();
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listCategorie", listOut);
+	
+		return "acceuil";
+	}
 
 	public String addCategorie() {
 		
@@ -89,7 +100,7 @@ public class CategorieManagedBean implements Serializable{
 		if(cOut.getId()!=0) {
 			
 			List<Categorie> list= catService.getAllCategorie();
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listCategorie", list)	;
+		adminSession.setAttribute("listCategorie", list);
 		
 		return "acceuil";
 		
@@ -97,7 +108,7 @@ public class CategorieManagedBean implements Serializable{
 		}else {
 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'est pas fait"));
 			
-			return "ajoutcategorie";
+			return "addcategorie";
 		}
 	}
 

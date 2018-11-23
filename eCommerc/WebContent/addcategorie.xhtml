@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+<title>add Categorie</title>
+</h:head>
+<h:body>
+<h:form>
+		<ui:insert name="monLayout">
+			<ui:include src="/ressources/template/template.xhtml"></ui:include>
+		</ui:insert>
+	</h:form>
+	
+	<h1 style="color: blue; text-align: center;">Formulaire d'ajout</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel>nom</h:outputLabel>
+			<p:inputText value="#{catMB.categorie.nomCat}" />
+			<h:outputLabel>description</h:outputLabel>
+			<p:inputText value="#{catMB.categorie.description}" />
+		
+			<p:commandButton value="Ajouter" action="#{catMB.addCategorie}" />
+		</h:panelGrid>
+	</h:form>
+	<h1 style="text-align: center; color: red">
+		<h:messages />
+	</h1>
+</h:body>
+</html>

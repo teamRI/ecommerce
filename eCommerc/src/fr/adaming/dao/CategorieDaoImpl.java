@@ -18,12 +18,16 @@ public class CategorieDaoImpl implements ICategorieDao{
 	@Override
 	public List<Categorie> getAllCategorie() {
 		
-		String req="SELECT c FROM Categorie c";
+		String req="SELECT e FROM Categorie e";
 		
 		Query query= em.createQuery(req);
 		
+		List<Categorie> liste= query.getResultList();
 		
-		return query.getResultList();
+		for(Categorie cat: liste) {
+			cat.set
+		}
+		return ;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="categories")
@@ -27,6 +28,13 @@ public class Categorie {
 	
 	@Lob
 	private byte photo;
+	
+	@Transient
+	private String image;
+	
+	
+
+
 	private String description;
 	
 	 //1.1******************Relations*****************************
@@ -43,23 +51,35 @@ public class Categorie {
 	}
 
 
-	public Categorie(String nomCat, byte photo, String description) {
+	
+	
+
+	public Categorie(String nomCat, byte photo, String image, String description, List<Produit> listeProduit) {
 		super();
 		this.nomCat = nomCat;
 		this.photo = photo;
+		this.image = image;
 		this.description = description;
+		this.listeProduit = listeProduit;
 	}
 
 
-	public Categorie(long id, String nomCat, byte photo, String description) {
+
+
+
+	public Categorie(long id, String nomCat, byte photo, String image, String description, List<Produit> listeProduit) {
 		super();
 		this.id = id;
 		this.nomCat = nomCat;
 		this.photo = photo;
+		this.image = image;
 		this.description = description;
+		this.listeProduit = listeProduit;
 	}
 
-	
+
+
+
 
 	//3*****************************GETTERS AND SETTERS*******************************************************
 	
@@ -105,7 +125,14 @@ public class Categorie {
 	}
 	
 	
-	
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 	
 	
 	
