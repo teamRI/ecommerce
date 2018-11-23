@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Page d'Ajout de client</title>
+	<title>Page de suppression de commande</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -13,24 +13,16 @@
 			<ui:include src="/ressources/template/template.xhtml"></ui:include>
 		</ui:insert>
 	</h:form>
-
-	<h1 style="color: blue; text-align: center;">Formulaire d'ajout</h1>
+	<h1 style="color: blue; text-align: center;">Formulaire de suppression</h1>
 	<h:form>
 		<h:panelGrid columns="2">
-			<h:outputLabel>nom</h:outputLabel>
-			<p:inputText value="#{clMB.cl.nom}" />
-			<h:outputLabel>adresse</h:outputLabel>
-			<p:inputText value="#{clMB.cl.adresse}" />
-			<h:outputLabel>e-mail</h:outputLabel>
-			<p:inputText value="#{clMB.cl.email}" />
-			<h:outputLabel>telephone</h:outputLabel>
-			<p:inputText value="#{clMB.cl.tel}" />
-			<p:commandButton value="Ajouter" action="#{clMB.addClient}" />
+			<h:outputLabel>id</h:outputLabel>
+			<p:inputText value="#{coMB.co.id}" />
+			<p:commandButton value="Supprimer" action="#{coMB.deleteCommande}" />
 		</h:panelGrid>
 	</h:form>
 	<h1 style="text-align: center; color: red">
 		<h:messages />
 	</h1>
-
 </h:body>
 </html>

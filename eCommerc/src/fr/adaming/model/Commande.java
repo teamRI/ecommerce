@@ -69,4 +69,20 @@ public class Commande {
 		this.dateCommande = dateCommande;
 	}
 
+	public Client getCl() {
+		return cl;
+	}
+
+	public void setCl(Client cl) {
+		this.cl = cl;
+	}
+
+	public List<LigneCommande> getListelco() {
+		return listelco;
+	}
+
+	public void setListelco(List<LigneCommande> listelco) {
+		this.listelco = listelco;
+	}
+
 }

@@ -118,6 +118,13 @@ public class Client {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", email=" + email + ", tel=" + tel + "]";
+	}
 	
 	
 	

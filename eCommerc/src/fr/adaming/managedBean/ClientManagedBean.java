@@ -27,6 +27,7 @@ public class ClientManagedBean implements Serializable {
 	private Client cl;
 	private List<LigneCommande> pannier;
 	private Commande co;
+	private boolean i;
 
 	public ClientManagedBean() {
 		super();
@@ -63,6 +64,14 @@ public class ClientManagedBean implements Serializable {
 		this.co = co;
 	}
 
+	public boolean isI() {
+		return i;
+	}
+
+	public void setI(boolean i) {
+		this.i = i;
+	}
+
 	public String addClient() {
 		Client clOut = clSer.addClient(this.cl);
 		if (clOut != null) {
@@ -88,9 +97,12 @@ public class ClientManagedBean implements Serializable {
 	public String getClient() {
 		Client clOut = clSer.getClient(cl);
 		if (clOut != null) {
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("clSession", clOut);
+			i=true;
+			this.cl=clOut;
+			System.out.println(cl);
 			return "getclient";
 		} else {
+			i=false;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
 			return "getclient";
 		}
