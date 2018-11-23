@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 
 @Local
@@ -13,5 +14,5 @@ public interface ICommandeDao {
 	public Commande upDateCommande(Commande co);
 	public int deleteCommande(Commande co);
 	public Commande getCommande(Commande co);
-	public List<Commande> getAllCommandeByCl(Commande co);
+	public List<Commande> getAllCommandeByCl(Client cl);
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 
 @Stateless
@@ -51,13 +52,13 @@ public class CommandeDaoImpl implements ICommandeDao {
 	}
 
 	@Override
-	public List<Commande> getAllCommandeByCl(Commande co) {
+	public List<Commande> getAllCommandeByCl(Client cl) {
 		// ecrire la requette JPQL
 		String req = "SELECT co FROM Commande co WHERE co.cl.id=:pIdCl";
 
 		// recupérer Query
 		Query query = em.createQuery(req);
-		query.setParameter("pIdCl", co.getCl().getId());
+		query.setParameter("pIdCl", cl.getId());
 
 		// recuperation du resultat
 		List<Commande> liste = query.getResultList();

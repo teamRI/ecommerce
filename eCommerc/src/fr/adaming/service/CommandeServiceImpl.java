@@ -38,9 +38,9 @@ public class CommandeServiceImpl implements ICommandeService{
 	}
 
 	@Override
-	public List<Commande> getAllCommandeByCl(Commande co) {
+	public List<Commande> getAllCommandeByCl(Client cl) {
 
-		return coDao.getAllCommandeByCl(co);
+		return coDao.getAllCommandeByCl(cl);
 	}
 
 	

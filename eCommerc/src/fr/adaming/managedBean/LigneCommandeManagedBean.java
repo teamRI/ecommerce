@@ -14,35 +14,47 @@ import javax.servlet.http.HttpSession;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
-import fr.adaming.service.ICommandeService;
+import fr.adaming.service.ILigneCommandeService;
 
-@ManagedBean(name="coMB")
+@ManagedBean(name="lcoMB")
 @RequestScoped
-public class CommandeManagedBean implements Serializable{
+public class LigneCommandeManagedBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private ICommandeService coSer;
+	private ILigneCommandeService lcoSer;
 	
+	private LigneCommande lco;
+	private List<LigneCommande> listelco;
 	private Commande co;
 	private Client cl;
-	private List<LigneCommande> listeLco;
-	private List<Commande> listeco;
 	private boolean i;
 	HttpSession maSession;
-	
-	public CommandeManagedBean() {
+	public LigneCommandeManagedBean() {
 		super();
 	}
 	
 	@PostConstruct
 	public void init() {
+		this.lco=new LigneCommande();
 		this.cl=new Client();
 		this.co=new Commande();
+		this.i=false;
 		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		i=false;
-		
+	}
+	
+	public LigneCommande getLco() {
+		return lco;
+	}
+	public void setLco(LigneCommande lco) {
+		this.lco = lco;
+	}
+	public List<LigneCommande> getListelco() {
+		return listelco;
+	}
+	public void setListelco(List<LigneCommande> listelco) {
+		this.listelco = listelco;
 	}
 	public Commande getCo() {
 		return co;
@@ -56,12 +68,6 @@ public class CommandeManagedBean implements Serializable{
 	public void setCl(Client cl) {
 		this.cl = cl;
 	}
-	public List<LigneCommande> getListeLco() {
-		return listeLco;
-	}
-	public void setListeLco(List<LigneCommande> listeLco) {
-		this.listeLco = listeLco;
-	}
 	public boolean isI() {
 		return i;
 	}
@@ -69,71 +75,63 @@ public class CommandeManagedBean implements Serializable{
 		this.i = i;
 	}
 	
-	
-	public List<Commande> getListeco() {
-		return listeco;
-	}
-
-	public void setListeco(List<Commande> listeco) {
-		this.listeco = listeco;
-	}
-
-	public String addCommande() {
+	public String addLigneCommande() {
 		this.co.setCl(this.cl);
-		this.co=coSer.addCommande(this.co);
-		if(co!=null) {
+		this.lco.setCo(this.co);
+		this.lco=lcoSer.addLigneCommande(this.lco);
+		if(lco!=null) {
 			i=true;
 			return "acceuil";
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
-			return "addcommande";
+			return "addlignecommande";
 		}
 	}
 	
-	public String deleteCommande() {
-		int verif=coSer.deleteCommande(this.co);
+	public String deleteLigneCommande() {
+		int verif=lcoSer.deleteLigneCommande(this.lco);
 		if(verif!=0) {
 			i=true;
 			return "acceuil";
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
-			return "deletecommande";
+			return "deletelignecommande";
 		}
 	}
 	
-	public String upDateCommande() {
+	public String upDateLigneCommande() {
 		this.co.setCl(this.cl);
-		this.co=coSer.upDateCommande(this.co);
-		if(this.co!=null) {
+		this.lco.setCo(this.co);
+		this.lco=lcoSer.upDateLigneCommande(this.lco);
+		if(this.lco!=null) {
 			i=true;
 			return "acceuil";
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
-			return "updatecommande";
+			return "updatelignecommande";
 		}
 	}
 
-	public String getCommande() {
-		this.co=coSer.getCommande(this.co);
-		if(this.co!=null) {
-			System.out.println(co);
+	public String getLigneCommande() {
+		this.lco=lcoSer.getLigneCommande(this.lco);
+		if(this.lco!=null) {
 			i=true;
-			return "getcommande";
+			return "getlignecommande";
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
-			return "getcommande";
+			return "getlignecommande";
 		}
 	}
-	public String getAllComandeByCl() {
-		this.listeco=coSer.getAllCommandeByCl(this.cl);
-		if(this.listeco!=null) {
-			System.out.println(listeco.get(1));
+	public String getAllLigneComandeByCo() {
+		this.listelco=lcoSer.getAllLigneCommandeByCo(this.co);
+		if(this.listelco!=null) {
 			i=true;
-			return "getallcommande";
+			return "getalllignecommande";
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
-			return "getallcommande";
+			return "getalllignecommande";
 		}
 		
 	}
+	
 }
