@@ -11,6 +11,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.model.UploadedFile;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
@@ -29,11 +31,15 @@ public class CategorieManagedBean implements Serializable{
 	
 	private Categorie categorie;
 	
+	private List<Categorie> listCategorie;
+	
 	private List<Produit> listProduit;
 
 	HttpSession adminSession;
 	
 	private UploadedFile file;
+	
+	private boolean i;
 	
 	
 	//3*************************************CONSTRUCTEUR VIDE**************************************************************
@@ -49,6 +55,7 @@ public class CategorieManagedBean implements Serializable{
 		this.adminSession= (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		adminSession.getAttribute("verifSession");
 		this.categorie= new Categorie();
+		i=false;
 	}
 
 
@@ -80,34 +87,58 @@ public class CategorieManagedBean implements Serializable{
 		this.adminSession = adminSession;
 	}
 	
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
+	
+	
+	public List<Categorie> getListCategorie() {
+		return listCategorie;
+	}
+
+	public void setListCategorie(List<Categorie> listCategorie) {
+		this.listCategorie = listCategorie;
+	}
+	
+	
+	public boolean isI() {
+		return i;
+	}
+
+	public void setI(boolean i) {
+		this.i = i;
+	}
+	
 	
 	
 	//6*****************************************AUTRES METHODES*************************************************************
 	
-	
-	
+
 
 	public String getAllCategorie() {
-		List<Categorie> listOut= catService.getAllCategorie();
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listCategorie", listOut);
+	this.listCategorie= catService.getAllCategorie();
 	
 		return "acceuil";
 	}
 
 	public String addCategorie() {
-		
-		Categorie cOut= catService.addCategorie(this.categorie);
-		if(cOut.getId()!=0) {
-			
-			List<Categorie> list= catService.getAllCategorie();
-		adminSession.setAttribute("listCategorie", list);
+	   this.categorie.setPhoto(file.getContents());
+		this.categorie= catService.addCategorie(categorie);
+		System.out.println(this.categorie.getNomCat());
+		if(this.categorie.getId()!=0) {
+			i=true;
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe", catService.getAllCategorie());
 		
 		return "acceuil";
 		
 			
 		}else {
 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'est pas fait"));
-			
+			i=false;
 			return "addcategorie";
 		}
 	}

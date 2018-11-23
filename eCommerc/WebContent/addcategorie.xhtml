@@ -16,12 +16,16 @@
 	</h:form>
 	
 	<h1 style="color: blue; text-align: center;">Formulaire d'ajout</h1>
-	<h:form>
+	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
 			<h:outputLabel>nom</h:outputLabel>
 			<p:inputText value="#{catMB.categorie.nomCat}" />
 			<h:outputLabel>description</h:outputLabel>
 			<p:inputText value="#{catMB.categorie.description}" />
+			<h:outputLabel value="Photo" for="image"/>
+			<br/>
+			<p:fileUpload id="image" value="#{catMB.file}" mode="simple" skinSimple="true"/>
+			<p:message for="image" display="icon"/>
 		
 			<p:commandButton value="Ajouter" action="#{catMB.addCategorie}" />
 		</h:panelGrid>

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+
 import fr.adaming.model.Categorie;
 
 @Stateless
@@ -25,9 +26,9 @@ public class CategorieDaoImpl implements ICategorieDao{
 		List<Categorie> liste= query.getResultList();
 		
 		for(Categorie cat: liste) {
-			cat.set
+			cat.setImage("data:image/png;base64," + org.apache.commons.codec.binary.Base64.encodeBase64String(cat.getPhoto()));
 		}
-		return ;
+		return liste;
 	}
 
 	@Override

@@ -15,13 +15,17 @@
 	</h:form>
 
 <h:form>
-<p:dataTable var="cat" value="#{sessionScope.listCategorie}" rendered="#{sessionScope.verifSession}">
+<p:dataTable var="cat" value="#{sessionScope.catListe}" rendered="#{sessionScope.verifSession}">
  <p:column headerText="ID">
         <h:outputText value="#{cat.id}" />
     </p:column>
     
      <p:column headerText="nom">
         <h:outputText value="#{cat.nomCat}" />
+    </p:column>
+    
+    <p:column headerText="Image">
+    <h:graphicImage value="#{cat.image}" style="width:100px;height:100px"/>
     </p:column>
     
      <p:column headerText="description">

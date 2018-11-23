@@ -27,7 +27,7 @@ public class Categorie {
 	private String nomCat;
 	
 	@Lob
-	private byte photo;
+	private byte[] photo;
 	
 	@Transient
 	private String image;
@@ -50,41 +50,35 @@ public class Categorie {
 		super();
 	}
 
-
-	
-	
-
-	public Categorie(String nomCat, byte photo, String image, String description, List<Produit> listeProduit) {
+	public Categorie(String nomCat, byte[] photo, String description, List<Produit> listeProduit) {
 		super();
 		this.nomCat = nomCat;
 		this.photo = photo;
-		this.image = image;
 		this.description = description;
 		this.listeProduit = listeProduit;
 	}
 
 
 
-
-
-	public Categorie(long id, String nomCat, byte photo, String image, String description, List<Produit> listeProduit) {
+	public Categorie(long id, String nomCat, byte[] photo, String description, List<Produit> listeProduit) {
 		super();
 		this.id = id;
 		this.nomCat = nomCat;
 		this.photo = photo;
-		this.image = image;
 		this.description = description;
 		this.listeProduit = listeProduit;
 	}
-
-
-
-
 
 	//3*****************************GETTERS AND SETTERS*******************************************************
 	
 	
 	
+
+
+
+
+
+
 	public long getId() {
 		return id;
 	}
@@ -105,12 +99,13 @@ public class Categorie {
 	}
 
 
-	public byte getPhoto() {
+
+	public byte[] getPhoto() {
 		return photo;
 	}
 
 
-	public void setPhoto(byte photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
