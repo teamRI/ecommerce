@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Page d'ajout de commande</title>
+	<title>Page d'Acceuil</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -16,11 +16,13 @@
 	<h1 style="color: blue; text-align: center;">Formulaire d'ajout</h1>
 	<h:form>
 		<h:panelGrid columns="2">
+			<h:outputLabel>Id</h:outputLabel>
+			<p:inputText value="#{coMB.co.id}" />
 			<h:outputLabel>date</h:outputLabel>
 			<p:calendar value="#{coMB.co.dateCommande}" />
 			<h:outputLabel>Id du client</h:outputLabel>
 			<p:inputText value="#{coMB.cl.id}" />
-			<p:commandButton value="Ajouter" action="#{coMB.addCommande}" />
+			<p:commandButton value="Modifier" action="#{coMB.upDateCommande}" />
 		</h:panelGrid>
 	</h:form>
 	<h1 style="text-align: center; color: red">

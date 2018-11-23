@@ -23,7 +23,7 @@ public class LigneCommande {
 	@JoinColumn(name="pr_id", referencedColumnName="id_pr")
 	private Produit pr;
 	
-	private int quantite;
+	private int quantiteCo;
 	private double prixfinal;
 	
 	@ManyToOne
@@ -36,14 +36,14 @@ public class LigneCommande {
 	public LigneCommande(Produit pr, int quantite) {
 		super();
 		this.pr = pr;
-		this.quantite = quantite;
+		this.quantiteCo = quantite;
 		this.prixfinal = quantite*pr.getPrix();
 	}
 	public LigneCommande(int id, Produit pr, int quantite) {
 		super();
 		this.id = id;
 		this.pr = pr;
-		this.quantite = quantite;
+		this.quantiteCo = quantite;
 		this.prixfinal = quantite*pr.getPrix();
 	}
 	public int getId() {
@@ -58,11 +58,11 @@ public class LigneCommande {
 	public void setPr(Produit pr) {
 		this.pr = pr;
 	}
-	public int getQuantite() {
-		return quantite;
+	public int getQuantiteCo() {
+		return quantiteCo;
 	}
-	public void setQuantite(int quantite) {
-		this.quantite = quantite;
+	public void setQuantiteCo(int quantite) {
+		this.quantiteCo = quantite;
 	}
 	public double getPrixfinal() {
 		return prixfinal;

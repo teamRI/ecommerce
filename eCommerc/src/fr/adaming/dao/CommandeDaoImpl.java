@@ -32,13 +32,13 @@ public class CommandeDaoImpl implements ICommandeDao {
 	public int deleteCommande(Commande co) {
 		try {
 		// ecrire la requette JPQL
-		String req = "DELETE co FROM Commande co WHERE co.id=:pIdCo";
+		String req = "DELETE FROM Commande co WHERE co.id=:pIdCo";
 
 		// recupérer Query
 		Query query = em.createQuery(req);
 		query.setParameter("pIdCo", co.getId());
-
-		return 1;
+		int verif=query.executeUpdate();
+		return verif;
 		}catch(Exception ex) {
 
 		}

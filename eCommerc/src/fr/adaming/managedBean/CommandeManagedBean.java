@@ -102,6 +102,7 @@ public class CommandeManagedBean implements Serializable{
 	}
 	
 	public String upDateCommande() {
+		this.co.setCl(this.cl);
 		this.co=coSer.upDateCommande(this.co);
 		if(this.co!=null) {
 			i=true;
