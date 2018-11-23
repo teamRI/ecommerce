@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="products")
@@ -24,8 +26,13 @@ public class Produit {
 	private String description;
 	private double prix;
 	private int quantite;
-	private boolean selectionne;
-	private byte photo;
+	
+	
+	@Lob
+	private byte[] photo;
+	
+	@Transient
+	private String image;
 	
 	
 	   //1.1******************Relations*****************************
@@ -44,33 +51,33 @@ public class Produit {
 	}
 
 
-	public Produit(String designation, String description, double prix, int quantite, boolean selectionne,
-			byte photo) {
+	public Produit(String designation, String description, double prix, int quantite, byte[] photo) {
 		super();
 		this.designation = designation;
 		this.description = description;
 		this.prix = prix;
 		this.quantite = quantite;
-		this.selectionne = selectionne;
 		this.photo = photo;
+
 	}
 
 
-	public Produit(long id, String designation, String description, double prix, int quantite, boolean selectionne,
-			byte photo) {
+
+	public Produit(long id, String designation, String description, double prix, int quantite, byte[] photo) {
 		super();
 		this.id = id;
 		this.designation = designation;
 		this.description = description;
 		this.prix = prix;
 		this.quantite = quantite;
-		this.selectionne = selectionne;
 		this.photo = photo;
 	}
 
 
 	//3*****************************GETTERS AND SETTERS*******************************************************
 	
+	
+
 	public long getId() {
 		return id;
 	}
@@ -121,25 +128,32 @@ public class Produit {
 	}
 
 
-	public boolean isSelectionne() {
-		return selectionne;
-	}
+	
 
 
-	public void setSelectionne(boolean selectionne) {
-		this.selectionne = selectionne;
-	}
-
-
-	public byte getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-
-	public void setPhoto(byte photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public LigneCommande getpLigneCommande() {
+		return pLigneCommande;
+	}
+
+	public void setpLigneCommande(LigneCommande pLigneCommande) {
+		this.pLigneCommande = pLigneCommande;
+	}
 
 	public Categorie getpCategorie() {
 		return pCategorie;

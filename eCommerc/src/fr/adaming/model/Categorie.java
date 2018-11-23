@@ -32,9 +32,6 @@ public class Categorie {
 	@Transient
 	private String image;
 	
-	
-
-
 	private String description;
 	
 	 //1.1******************Relations*****************************

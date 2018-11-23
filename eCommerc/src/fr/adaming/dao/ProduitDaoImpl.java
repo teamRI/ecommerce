@@ -10,52 +10,55 @@ import javax.persistence.Query;
 import org.apache.commons.codec.binary.Base64;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 
 @Stateless
-public class CategorieDaoImpl implements ICategorieDao{
+public class ProduitDaoImpl implements IProduitDao{
 
 	@PersistenceContext(unitName="eCommerc")
 	private EntityManager em;
 	
+	
 	@Override
-	public List<Categorie> getAllCategorie() {
-		
-		String req="SELECT c FROM Categorie c";
+	public List<Produit> getAllProduit(Categorie c) {
+
+		String req="SELECT p FROM Produit as p WHERE p.pCategorie.id=:pCategorie";
 		
 		Query query= em.createQuery(req);
 		
-		List<Categorie> liste= query.getResultList();
+		query.setParameter("pCategorie", c.getId());
 		
-		for(Categorie cat: liste) {
-			cat.setImage("data:image/png;base64," + Base64.encodeBase64String(cat.getPhoto()));
+		List<Produit> liste= query.getResultList();
+		
+	
+		for(Produit pr: liste) {
+			pr.setImage("data:image/png;base64," + Base64.encodeBase64String(pr.getPhoto()));
 		}
-		return liste; 
+		return liste;
 	}
 
 	@Override
-	public Categorie addCategorie(Categorie c) {
-		
-		em.persist(c);
-		return c;
+	public Produit addProduit(Produit pr) {
+		em.persist(pr);
+		return pr;
 	}
 
 	@Override
-	public Categorie getCategorie(Categorie c) {
+	public Produit getProduit(Produit pr) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Categorie upDateCategorie(Categorie c) {
+	public Produit upDateProduit(Produit pr) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int delateCategorie(Categorie c) {
+	public int delateProduit(Produit pr) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
 
 }

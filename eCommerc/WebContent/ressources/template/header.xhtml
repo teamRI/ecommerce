@@ -128,6 +128,14 @@
 					</p:submenu>
 				</p:column>
 				<p:column>
+					<p:submenu label="Produit">
+						<p:menuitem value="ajouter" url="addproduit.xhtml" />
+						<p:menuitem value="supprimer" url="deleteproduit.xhtml" />
+						<p:menuitem value="modifier" url="updateproduit.xhtml" />
+						<p:menuitem value="chercher" url="getproduit.xhtml" />
+					</p:submenu>
+				</p:column>
+				<p:column>
 					<p:submenu>
 						<p:menuitem value="Deconnexion" icon="pi pi-times"
 							action="#{aMB.logoutAdmin}" ajax="false"/>
