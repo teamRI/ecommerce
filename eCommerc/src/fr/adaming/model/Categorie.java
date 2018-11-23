@@ -72,62 +72,62 @@ public class Categorie {
 	//3*****************************GETTERS AND SETTERS*******************************************************
 	
 	
-	
-
-
-
-
-
-
 	public long getId() {
 		return id;
 	}
-
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
-
 	public String getNomCat() {
 		return nomCat;
 	}
-
 
 	public void setNomCat(String nomCat) {
 		this.nomCat = nomCat;
 	}
 
-
-
 	public byte[] getPhoto() {
 		return photo;
 	}
-
 
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	public String getImage() {
-		return image;
+
+	public List<Produit> getListeProduit() {
+		return listeProduit;
 	}
 
-
-	public void setImage(String image) {
-		this.image = image;
+	public void setListeProduit(List<Produit> listeProduit) {
+		this.listeProduit = listeProduit;
 	}
+
+	
+	
+
+
+
+
+
+
 	
 	
 	

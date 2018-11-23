@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base64;
 
 import fr.adaming.model.Categorie;
 
@@ -19,14 +20,14 @@ public class CategorieDaoImpl implements ICategorieDao{
 	@Override
 	public List<Categorie> getAllCategorie() {
 		
-		String req="SELECT e FROM Categorie e";
+		String req="SELECT c FROM Categorie c";
 		
 		Query query= em.createQuery(req);
 		
 		List<Categorie> liste= query.getResultList();
 		
 		for(Categorie cat: liste) {
-			cat.setImage("data:image/png;base64," + org.apache.commons.codec.binary.Base64.encodeBase64String(cat.getPhoto()));
+			cat.setImage("data:image/png;base64," + Base64.encodeBase64String(cat.getPhoto()));
 		}
 		return liste;
 	}

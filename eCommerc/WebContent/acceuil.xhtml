@@ -15,7 +15,7 @@
 	</h:form>
 
 <h:form>
-<p:dataTable var="cat" value="#{sessionScope.catListe}" rendered="#{sessionScope.verifSession}">
+<p:dataTable var="cat" value="#{sessionScope.catListe}">
  <p:column headerText="ID">
         <h:outputText value="#{cat.id}" />
     </p:column>

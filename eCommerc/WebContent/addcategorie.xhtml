@@ -27,7 +27,7 @@
 			<p:fileUpload id="image" value="#{catMB.file}" mode="simple" skinSimple="true"/>
 			<p:message for="image" display="icon"/>
 		
-			<p:commandButton value="Ajouter" action="#{catMB.addCategorie}" />
+			<p:commandButton value="Ajouter" action="#{catMB.addCategorie}" ajax="false"/>
 		</h:panelGrid>
 	</h:form>
 	<h1 style="text-align: center; color: red">

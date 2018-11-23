@@ -1,5 +1,7 @@
 package fr.adaming.managedBean;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.model.UploadedFile;
+
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
@@ -55,6 +58,46 @@ public class CategorieManagedBean implements Serializable{
 		this.adminSession= (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		adminSession.getAttribute("verifSession");
 		this.categorie= new Categorie();
+		this.listCategorie= catService.getAllCategorie();
+			this.file= new UploadedFile() {
+				
+				@Override
+				public void write(String arg0) throws Exception {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public long getSize() {
+					// TODO Auto-generated method stub
+					return 0;
+				}
+				
+				@Override
+				public InputStream getInputstream() throws IOException {
+					// TODO Auto-generated method stub
+					return null;
+				}
+				
+				@Override
+				public String getFileName() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+				
+				@Override
+				public byte[] getContents() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+				
+				@Override
+				public String getContentType() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+			};
+			
 		i=false;
 	}
 
@@ -119,17 +162,12 @@ public class CategorieManagedBean implements Serializable{
 	
 
 
-	public String getAllCategorie() {
-	this.listCategorie= catService.getAllCategorie();
-	
-		return "acceuil";
-	}
 
 	public String addCategorie() {
 	   this.categorie.setPhoto(file.getContents());
-		this.categorie= catService.addCategorie(categorie);
-		System.out.println(this.categorie.getNomCat());
-		if(this.categorie.getId()!=0) {
+		Categorie c= catService.addCategorie(categorie);
+		
+		if(c.getId()!=0) {
 			i=true;
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe", catService.getAllCategorie());
 		
