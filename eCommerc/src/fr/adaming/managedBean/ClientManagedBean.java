@@ -9,10 +9,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
 
 @ManagedBean(name = "clMB")
@@ -23,11 +26,14 @@ public class ClientManagedBean implements Serializable {
 
 	@EJB
 	private IClientService clSer;
+	@EJB
+	private ICategorieService caSer;
 
 	private Client cl;
 	private List<LigneCommande> pannier;
 	private Commande co;
 	private boolean i;
+	HttpSession maSession;
 
 	public ClientManagedBean() {
 		super();
@@ -75,11 +81,12 @@ public class ClientManagedBean implements Serializable {
 	public String addClient() {
 		Client clOut = clSer.addClient(this.cl);
 		if (clOut != null) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le client a été ajouté!"));
-			return "addclient";
+			List<Categorie> catliste = caSer.getAllCategorie();
+			maSession.setAttribute("catliste", catliste);
+			return "acceuilt";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
-			return "adclient";
+			return "addclient";
 		}
 	}
 
@@ -97,17 +104,17 @@ public class ClientManagedBean implements Serializable {
 	public String getClient() {
 		Client clOut = clSer.getClient(cl);
 		if (clOut != null) {
-			i=true;
-			this.cl=clOut;
+			i = true;
+			this.cl = clOut;
 			System.out.println(cl);
 			return "getclient";
 		} else {
-			i=false;
+			i = false;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
 			return "getclient";
 		}
 	}
-	
+
 	public String deleteClient() {
 		int verif = clSer.deleteClient(cl);
 		if (verif != 0) {

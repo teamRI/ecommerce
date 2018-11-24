@@ -37,7 +37,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	@Override
 	public List<LigneCommande> getAllLigneCommandeByCo(Commande co) {
 		// ecrire la requette JPQL
-		String req = "SELECT lco FROM Commande lco WHERE lco.co.id=:pIdCo";
+		String req = "SELECT lco FROM LigneCommande lco WHERE lco.co.id=:pIdCo";
 
 		// recupérer Query
 		Query query = em.createQuery(req);
@@ -52,7 +52,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	public int deleteLigneCommande(LigneCommande lco) {
 		try {
 			// ecrire la requette JPQL
-			String req = "DELETE FROM LigneCommande co WHERE lco.id=:pIdlCo";
+			String req = "DELETE FROM LigneCommande lco WHERE lco.id=:pIdlCo";
 
 			// recupérer Query
 			Query query = em.createQuery(req);

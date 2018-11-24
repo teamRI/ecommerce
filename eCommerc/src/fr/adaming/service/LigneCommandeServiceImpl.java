@@ -9,21 +9,28 @@ import fr.adaming.dao.ICommandeDao;
 import fr.adaming.dao.ILigneCommandeDao;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Produit;
 
 @Stateful
 public class LigneCommandeServiceImpl implements ILigneCommandeService{
 
 	@EJB
 	private ILigneCommandeDao lcoDao;
+	@EJB
+	private IProduitService prSer;
 	
 	@Override
 	public LigneCommande addLigneCommande(LigneCommande lco) {
+//		Produit pr=prSer.getProduit(lco.getPr(), lco.getPr().getpCategorie());
+//		lco.setPr(pr);
 		LigneCommande lcoOut=lcoDao.addLigneCommande(lco);
 		return lcoOut;
 	}
 
 	@Override
 	public LigneCommande upDateLigneCommande(LigneCommande lco) {
+//		Produit pr=prSer.getProduit(lco.getPr(), lco.getPr().getpCategorie());
+//		lco.setPr(pr);
 		return lcoDao.upDateLigneCommande(lco);
 	}
 

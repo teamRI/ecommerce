@@ -11,5 +11,5 @@ public interface IClientDao {
 	public Client upDateClient(Client cl);
 	public int deleteClient(Client cl);
 	public Client getClient(Client cl);
-
+	public Client isExist(Client c);
 }

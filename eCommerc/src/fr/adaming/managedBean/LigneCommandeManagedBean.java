@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ILigneCommandeService;
 
 @ManagedBean(name="lcoMB")
@@ -30,6 +31,7 @@ public class LigneCommandeManagedBean implements Serializable{
 	private Commande co;
 	private Client cl;
 	private boolean i;
+	private Produit pr;
 	HttpSession maSession;
 	public LigneCommandeManagedBean() {
 		super();
@@ -41,6 +43,7 @@ public class LigneCommandeManagedBean implements Serializable{
 		this.cl=new Client();
 		this.co=new Commande();
 		this.i=false;
+		this.pr=new Produit();
 		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
 	
@@ -75,9 +78,18 @@ public class LigneCommandeManagedBean implements Serializable{
 		this.i = i;
 	}
 	
+	public Produit getPr() {
+		return pr;
+	}
+
+	public void setPr(Produit pr) {
+		this.pr = pr;
+	}
+
 	public String addLigneCommande() {
 		this.co.setCl(this.cl);
 		this.lco.setCo(this.co);
+		this.lco.setPr(this.pr);
 		this.lco=lcoSer.addLigneCommande(this.lco);
 		if(lco!=null) {
 			i=true;
@@ -102,6 +114,7 @@ public class LigneCommandeManagedBean implements Serializable{
 	public String upDateLigneCommande() {
 		this.co.setCl(this.cl);
 		this.lco.setCo(this.co);
+		this.lco.setPr(this.pr);
 		this.lco=lcoSer.upDateLigneCommande(this.lco);
 		if(this.lco!=null) {
 			i=true;
@@ -115,6 +128,7 @@ public class LigneCommandeManagedBean implements Serializable{
 	public String getLigneCommande() {
 		this.lco=lcoSer.getLigneCommande(this.lco);
 		if(this.lco!=null) {
+			System.out.println(lco.getPr().getId());
 			i=true;
 			return "getlignecommande";
 		}else {
@@ -125,6 +139,7 @@ public class LigneCommandeManagedBean implements Serializable{
 	public String getAllLigneComandeByCo() {
 		this.listelco=lcoSer.getAllLigneCommandeByCo(this.co);
 		if(this.listelco!=null) {
+			System.out.println(listelco.get(0).getPr().getId());
 			i=true;
 			return "getalllignecommande";
 		}else {

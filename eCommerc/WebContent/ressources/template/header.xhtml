@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<title>header</title>
 </h:head>
@@ -18,26 +19,18 @@
 			value="pannier" action="#" />
 		<p:megaMenu style="position: relative; top:50px; margin-top:20px"
 			orientation="horizontal">
-			<p:submenu label="cat1" icon="pi pi-check">
-				<p:column>
-					<p:submenu>
-						<p:menuitem value="produit1.1" url="#" />
-						<p:menuitem value="produit1.2" url="#" />
-						<p:menuitem value="produit1.3" url="#" />
-						<p:menuitem value="produit1.4" url="#" />
-						<p:menuitem value="produit1.5" url="#" />
-					</p:submenu>
-				</p:column>
-				<p:column>
-					<p:submenu>
-						<p:menuitem value="produit2.1" url="#" />
-						<p:menuitem value="produit2.2" url="#" />
-						<p:menuitem value="produit2.3" url="#" />
-						<p:menuitem value="produit2.4" url="#" />
-						<p:menuitem value="produit2.5" url="#" />
-					</p:submenu>
-				</p:column>
-			</p:submenu>
+			<c:forEach var="i" begin="0" step="1" end="#{acMB.size}">
+				<p:submenu label="#{sessionScope.catListe.get(i).nomCat}"
+					icon="pi pi-check">
+					<c:forEach var="j" begin="0" step="1" end="#{sessionScope.sizei}">
+						<p:column>
+							<p:submenu>
+								<p:menuitem value="#{sessionScope.prodlistei}.get(j).designation" url="produit.xhtml" />
+							</p:submenu>
+						</p:column>
+					</c:forEach>
+				</p:submenu>
+			</c:forEach>
 			<p:submenu label="cat2" icon="pi pi-check">
 				<p:column>
 					<p:submenu>
@@ -120,6 +113,15 @@
 					</p:submenu>
 				</p:column>
 				<p:column>
+					<p:submenu label="lignecommande">
+						<p:menuitem value="ajouter" url="addlignecommande.xhtml" />
+						<p:menuitem value="supprimer" url="deletelignecommande.xhtml" />
+						<p:menuitem value="modifier" url="updatelignecommande.xhtml" />
+						<p:menuitem value="chercher" url="getlignecommande.xhtml" />
+						<p:menuitem value="afficher tous" url="getalllignecommande.xhtml" />
+					</p:submenu>
+				</p:column>
+				<p:column>
 					<p:submenu label="Categorie">
 						<p:menuitem value="ajouter" url="addcategorie.xhtml" />
 						<p:menuitem value="supprimer" url="deletecategorie.xhtml" />
@@ -138,7 +140,7 @@
 				<p:column>
 					<p:submenu>
 						<p:menuitem value="Deconnexion" icon="pi pi-times"
-							action="#{aMB.logoutAdmin}" ajax="false"/>
+							action="#{aMB.logoutAdmin}" ajax="false" />
 					</p:submenu>
 				</p:column>
 			</p:submenu>
