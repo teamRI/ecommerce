@@ -83,7 +83,7 @@ public class ClientManagedBean implements Serializable {
 		if (clOut != null) {
 			List<Categorie> catliste = caSer.getAllCategorie();
 			maSession.setAttribute("catliste", catliste);
-			return "acceuilt";
+			return "acceuil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
 			return "addclient";
