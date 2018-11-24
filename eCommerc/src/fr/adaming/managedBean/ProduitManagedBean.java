@@ -164,4 +164,54 @@ public class ProduitManagedBean implements Serializable{
 			}
 		}
 		
+		public String getProduits() {
+//			this.produit.getPhoto;
+			this.produit.setpCategorie(this.categorie);
+			this.produit= prService.getProduit(produit, categorie);
+			
+			if(this.produit!=null) {
+				i=true;
+				return "getproduit";
+			}else {
+				
+				i=false;
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'existe pas"));
+				return "getproduit";
+			}
+		}
+	
+		public String upDateProduit() {
+			this.produit.setPhoto(file.getContents());
+			this.produit.setpCategorie(this.categorie);
+			Produit pOut= prService.upDateProduit(this.produit, this.categorie);
+			if(pOut!=null) {
+				List<Produit> list= prService.getAllProduit(categorie);
+				i=true;
+				adminSession.setAttribute("listProd", list);
+				return "updateproduit";
+			}else {
+				
+				i=false;
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'est pas modifié"));
+				return "updateproduit";
+			}
+		}
+		
+		public String delateProduit() {
+			this.produit.setPhoto(file.getContents());
+			this.produit.setpCategorie(this.categorie);
+		prService.delateProduit(this.produit);
+		if(this.produit!=null) {
+			List<Produit> list= prService.getAllProduit(categorie);
+			adminSession.setAttribute("listProd", list);
+			
+			return "deleteproduit";
+			
+		}else{
+			//Recuperer le contexte (c'est ici où les messages d'erreur sont stoquées) de la req 
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le produit n'est pas effacé"));
+		
+		return "deleteproduit";
+		}
+		}
 }

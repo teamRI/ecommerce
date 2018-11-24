@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.binary.Base64;
 
 import fr.adaming.model.Categorie;
@@ -41,8 +42,9 @@ public class CategorieDaoImpl implements ICategorieDao{
 
 	@Override
 	public Categorie getCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		Categorie cOut= em.find(Categorie.class, c.getId());
+		cOut.setImage("data:image/png;base64," + Base64.encodeBase64String(c.getPhoto()));
+		return cOut;
 	}
 
 	@Override

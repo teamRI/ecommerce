@@ -29,20 +29,20 @@ public class ProduitServiceImpl implements IProduitService{
 
 	@Override
 	public Produit getProduit(Produit pr, Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		Produit pOut= prDao.getProduit(pr);
+		return pOut;
 	}
 
 	@Override
 	public Produit upDateProduit(Produit pr, Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		pr.setpCategorie(c);
+		return prDao.upDateProduit(pr);
 	}
 
 	@Override
-	public int delateProduit(Produit pr, Categorie c) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delateProduit(Produit pr) {
+		
+		return prDao.delateProduit(pr);
 	}
 	
 

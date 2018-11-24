@@ -181,4 +181,19 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 		}
 	}
 
+	public String getCategories() {
+		this.categorie= catService.getCategorie(categorie);
+		
+		if(this.categorie!=null) {
+			i=true;
+			return "getcategorie";
+		}else {
+			
+			i=false;
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La categorie n'existe pas"));
+			return "getcategorie";
+		}
+	}
+	
+	
 }

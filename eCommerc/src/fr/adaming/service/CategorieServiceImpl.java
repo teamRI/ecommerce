@@ -28,8 +28,8 @@ public class CategorieServiceImpl implements ICategorieService{
 
 	@Override
 	public Categorie getCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		Categorie cOut=catDao.getCategorie(c);
+		return cOut;
 	}
 
 	@Override

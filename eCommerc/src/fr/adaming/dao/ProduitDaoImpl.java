@@ -45,20 +45,34 @@ public class ProduitDaoImpl implements IProduitDao{
 
 	@Override
 	public Produit getProduit(Produit pr) {
-		// TODO Auto-generated method stub
-		return null;
+		Produit pOut= em.find(Produit.class, pr.getId());
+		pOut.setImage("data:image/png;base64," + Base64.encodeBase64String(pr.getPhoto()));
+		return pOut;
 	}
 
 	@Override
 	public Produit upDateProduit(Produit pr) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		Produit pOut= em.find(Produit.class, pr.getId());
+		
+		pOut.setQuantite(pr.getQuantite());
+		pOut.setPrix(pr.getPrix());
+		pOut.setpCategorie(pr.getpCategorie());
+		pOut.setImage("data:image/png;base64," + Base64.encodeBase64String(pr.getPhoto()));
+		pOut.setDescription(pr.getDescription());
+		pOut.setDesignation(pr.getDesignation());
+		return em.merge(pOut);
 	}
 
 	@Override
 	public int delateProduit(Produit pr) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		String req="DELATE p FROM Produit p WHERE p.id=:pId";
+		Query query= em.createQuery(req);
+		query.setParameter("pId", pr.getId());
+		
+		int verif= query.executeUpdate();
+		return verif;
 	}
 
 }
