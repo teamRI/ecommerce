@@ -66,13 +66,14 @@ public class ProduitDaoImpl implements IProduitDao{
 
 	@Override
 	public int delateProduit(Produit pr) {
+		Produit pOut= em.find(Produit.class, pr.getId());
+		if(pOut!=null) {
+			em.remove(pOut);
+			return 1;
+		}else {
+		return 0;
+		}
 		
-		String req="DELATE p FROM Produit p WHERE p.id=:pId";
-		Query query= em.createQuery(req);
-		query.setParameter("pId", pr.getId());
-		
-		int verif= query.executeUpdate();
-		return verif;
 	}
 
 }

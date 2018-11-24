@@ -34,14 +34,14 @@ public class CategorieServiceImpl implements ICategorieService{
 
 	@Override
 	public Categorie upDateCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return catDao.upDateCategorie(c);
 	}
 
 	@Override
 	public int delateCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return catDao.delateCategorie(c);
 	}
 	
 	

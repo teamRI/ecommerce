@@ -49,14 +49,23 @@ public class CategorieDaoImpl implements ICategorieDao{
 
 	@Override
 	public Categorie upDateCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		Categorie cOut= em.find(Categorie.class, c.getId());
+		
+		cOut.setDescription(c.getDescription());
+		cOut.setNomCat(c.getNomCat());
+		cOut.setImage("data:image/png;base64," + Base64.encodeBase64String(c.getPhoto()));
+		return em.merge(cOut);
 	}
 
 	@Override
 	public int delateCategorie(Categorie c) {
-		// TODO Auto-generated method stub
+		Categorie cOut= em.find(Categorie.class, c.getId());
+		if(cOut!=null) {
+			em.remove(cOut);
+			return 1;
+		}else {
 		return 0;
+		}
 	}
 	
 

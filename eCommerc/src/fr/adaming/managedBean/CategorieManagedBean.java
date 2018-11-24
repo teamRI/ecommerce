@@ -195,5 +195,32 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 		}
 	}
 	
+	public String upDateCategorie() {
+		this.categorie.setPhoto(file.getContents());
+		Categorie cOut= catService.upDateCategorie(this.categorie);
+		if(cOut!=null) {
+			List<Categorie> list= catService.getAllCategorie();
+			i=true;
+			this.listCategorie=list;
+			return "updatecategorie";
+		}else {
+			
+			i=false;
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La Categorie n'est pas modifié"));
+			return "updatecategorie";
+		}
+	}
 	
+	public String deleteCategorie() {
+		catService.delateCategorie(this.categorie);
+		if(this.categorie!=null) {
+			List<Categorie> list= catService.getAllCategorie();
+			this.listCategorie= list;
+			
+			return "acceuil";
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La categorie n'est pas effacé"));
+			return "deletecategorie";
+		}
+	}
 }
