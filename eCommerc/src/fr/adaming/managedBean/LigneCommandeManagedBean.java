@@ -87,6 +87,7 @@ public class LigneCommandeManagedBean implements Serializable{
 	}
 
 	public String addLigneCommande() {
+		this.cl=(Client) maSession.getAttribute("client");
 		this.co.setCl(this.cl);
 		this.lco.setCo(this.co);
 		this.lco.setPr(this.pr);
@@ -96,7 +97,7 @@ public class LigneCommandeManagedBean implements Serializable{
 			return "acceuil";
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
-			return "addlignecommande";
+			return "acceuil";
 		}
 	}
 	
@@ -137,18 +138,15 @@ public class LigneCommandeManagedBean implements Serializable{
 		}
 	}
 	public String getAllLigneComandeByCo() {
-		this.listelco=lcoSer.getAllLigneCommandeByCo(this.co);
-		try {
-		if(this.listelco!=null) {
-			maSession.setAttribute("listeCo", this.cl.getListeCo());
-			for (int i = 0; i <= this.cl.getListeCo().size(); i++) {
-				maSession.setAttribute("listlco" + i, cl.getListeCo().get(i).getListelco());
+		List<Commande> listeCo=(List<Commande>) maSession.getAttribute("listeCo");
+		this.cl=(Client) maSession.getAttribute("client");
+		try {			
+			for (int i = 0; i <= listeCo.size()-1; i++) {
+				this.listelco=lcoSer.getAllLigneCommandeByCo(listeCo.get(i));
+				maSession.setAttribute("listlco" + i, this.listelco);
 			}
-			maSession.setAttribute("client", this.cl);
-			System.out.println(listelco.get(0).getPr().getId());
 			i=true;
 			return "pannier";
-		}
 		}catch (Exception e) {
 			
 		}

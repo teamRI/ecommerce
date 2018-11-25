@@ -94,19 +94,11 @@ public class AcceuilManagedBean implements Serializable {
 
 		catliste = caSer.getAllCategorie();
 		size = catliste.size() - 1;
-		System.out.println("**************size*************");
-		System.out.println(size);
-		System.out.println("**************NomCat*************");
-		System.out.println(catliste.get(0).getNomCat());
 		for (int j = 0; j <= size; j++) {
 			prodliste = prSer.getAllProduit(catliste.get(j));
 			maSession.setAttribute("prodliste" + j, this.prodliste);
 			maSession.setAttribute("size" + j, this.prodliste.size() - 1);
-			System.out.println("**************Designation*************");
-			System.out.println(prodliste.get(0).getDesignation());
 		}
-		System.out.println("**************prodliste1*************");
-		System.out.println(((List<Produit>) maSession.getAttribute("prodliste1")).get(0).getDesignation());
 		maSession.setAttribute("catliste", this.catliste);
 		return "acceuil";
 	}
