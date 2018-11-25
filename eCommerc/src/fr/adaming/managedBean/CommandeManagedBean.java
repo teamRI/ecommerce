@@ -1,5 +1,6 @@
 package fr.adaming.managedBean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,9 +12,13 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import com.lowagie.text.pdf.codec.Base64.OutputStream;
+
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.CreatePdf;
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Mail;
 import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILigneCommandeService;
 
@@ -28,6 +33,10 @@ public class CommandeManagedBean implements Serializable {
 
 	@EJB
 	private ILigneCommandeService lcoSer;
+	
+	Mail envoyermail= new Mail();
+	
+	CreatePdf createpdf= new CreatePdf();
 
 	private Commande co;
 	private Client cl;
@@ -145,6 +154,8 @@ public class CommandeManagedBean implements Serializable {
 	}
 
 	public String validerCommande() {
+		this.cl=(Client) maSession.getAttribute("client");
+		this.co= cl.getCo();
 		List<LigneCommande> listlco = (List<LigneCommande>) maSession.getAttribute("listlco");
 		for (LigneCommande lco : listlco) {
 
@@ -153,7 +164,19 @@ public class CommandeManagedBean implements Serializable {
 		int verif = coSer.deleteCommande(this.co);
 
 		if (verif != 0) {
-
+//		OutputStream os;
+//		try {
+//			
+//			
+//			os = (OutputStream) FacesContext.getCurrentInstance().getExternalContext().getResponseOutputStream();
+//		FacesContext.getCurrentInstance().getExternalContext().responseReset();
+//		
+//			createpdf.writePdf(os);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();}
+	
+envoyermail.sendMail(co.getCl(), co, listlco);
 			i = true;
 			return "acceuil";
 		} else {

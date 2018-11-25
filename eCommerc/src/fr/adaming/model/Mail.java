@@ -1,5 +1,6 @@
 package fr.adaming.model;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -20,10 +21,12 @@ import javax.mail.internet.MimeMultipart;
 
 import fr.adaming.dao.LigneCommandeDaoImpl;
 
-@Stateless
-public class Mail {
 
-	public static void sendMail(Client cl, Commande co, LigneCommande lc) {
+public class Mail {
+	
+	private static double prixTotal=0;
+
+	public static void sendMail(Client cl, Commande co, List<LigneCommande> list) {
 		final String username= "conseilleuringrid@gmail.com";
 		final String password= "mclikfnxfzacsyrj";
 		
@@ -74,19 +77,20 @@ public class Mail {
 					
 					// Now set the actual message
 					String recap = "";
-					for (LigneCommande lic : co.getListelco()) {
+					for (LigneCommande lic : list) {
 						recap = recap + "\n - " + lic.getQuantiteCo() + " " + lic.getPr().getDesignation()+" à "+lic.getPr().getPrix()+"€ pièce";
+						prixTotal= lic.getPrixfinal()+prixTotal;
 					}
 					
 					messageBodyPart.setText("Mr/Mme " + cl.getNom()
 							+ ", \nBonjour,\nNous vous confirmons l'enregistrement de votre commande numéro " + co.getId()
-							+ ".\nRécapitulatif de la commande :" + recap +"\n\nMontant total de la commande :"+ lc.getPrixfinal()+"€"
+							+ ".\nRécapitulatif de la commande :" + recap +"\n\nMontant total de la commande :"+prixTotal+"€"
 							+ "\n\nVous trouverez le détail de votre facture en pièce jointe au format pdf.\n\n"
 							+ "En espérant vous revoir bientôt sur notre site, cordialement\n\nToute l'équipe de ECommerce");
 
 					// Part two is attachment 
 					messageBodyPart = new MimeBodyPart(); 
-					DataSource source = new FileDataSource("C:\\Users\\inti0490\\Desktop\\Formation\\Workspace\\GenerationPDF\\Récapitulatif.pdf"); 
+					DataSource source = new FileDataSource("C:\\Users\\inti0490\\Desktop\\Formation\\Workspace\\GenerationPDF\\Test.pdf"); 
 					messageBodyPart.setDataHandler(new DataHandler(source)); 
 					messageBodyPart.setFileName("Récapitulatif commande n°"+co.getId()+".pdf"); 
 					multipart.addBodyPart(messageBodyPart); 

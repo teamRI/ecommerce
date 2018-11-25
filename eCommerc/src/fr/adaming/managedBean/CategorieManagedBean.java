@@ -245,6 +245,6 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 	public String getListProduits() {
 		prCat=true;
 		this.listProduit= prService.getAllProduit(this.categorie);
-		return "acceuil";
+		return "catetpr";
 	}
 }
