@@ -16,8 +16,11 @@
 	</h:form>
 
 	<h:form>
-		<p:outputLabel value="#{sessionScope.client.co.id}"/>
-			<p:dataTable var="lco" value="#{sessionScope.listlco}">
+		
+			<p:dataTable var="lco" value="#{sessionScope.listlco}" >
+			<f:facet name="header">
+            <p:outputLabel value="commande n°#{sessionScope.client.co.id}"/>
+        </f:facet>
 				<p:column headerText="ID">
 					<h:outputText value="#{lco.id}" />
 				</p:column>
@@ -40,9 +43,25 @@
 						<f:setPropertyActionListener value="#{lco.id}"
 							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
 					</h:commandLink>
+					<h:commandLink action="#{lcoMB.upDatePlusLigneCommande}">
+						<p:graphicImage url="WebContent/ressources/images/plus.jpg"
+							width="30"></p:graphicImage>
+						<f:setPropertyActionListener value="#{lco.id}"
+							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
+					</h:commandLink>
+					<h:commandLink action="#{lcoMB.upDateMoinsLigneCommande}">
+						<p:graphicImage url="WebContent/ressources/images/moins.jpg"
+							width="30"></p:graphicImage>
+						<f:setPropertyActionListener value="#{lco.id}"
+							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
+					</h:commandLink>
 				</p:column>
 			</p:dataTable>
-			
+			<p:outputLabel value="#{lcoMB.prixTotal}"/>
+	</h:form>
+	<h:form>
+	<p:commandButton value="valider" action="#{coMB.validerCommande}"/>
+	<p:commandButton value="annuler la commande" action="#{coMB.deleteCommande}"/>
 	</h:form>
 </h:body>
 </html>

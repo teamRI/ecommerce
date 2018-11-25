@@ -124,24 +124,38 @@ public class LigneCommandeManagedBean implements Serializable {
 		int verif = lcoSer.deleteLigneCommande(this.lco);
 		if (verif != 0) {
 			i = true;
-			return "acceuil";
+			return "pannier";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
-			return "deletelignecommande";
+			return "pannier";
 		}
 	}
 
-	public String upDateLigneCommande() {
-		this.co.setCl(this.cl);
-		this.lco.setCo(this.co);
-		this.lco.setPr(this.pr);
+	public String upDatePlusLigneCommande() {
+
+		int q = lcoSer.getLigneCommande(this.lco).getQuantiteCo();
+		this.lco.setQuantiteCo(q + 1);
 		this.lco = lcoSer.upDateLigneCommande(this.lco);
 		if (this.lco != null) {
 			i = true;
-			return "acceuil";
+			return "pannier";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
-			return "updatelignecommande";
+			return "pannier";
+		}
+	}
+
+	public String upDateMoinsLigneCommande() {
+
+		int q = lcoSer.getLigneCommande(this.lco).getQuantiteCo();
+		this.lco.setQuantiteCo(q - 1);
+		this.lco = lcoSer.upDateLigneCommande(this.lco);
+		if (this.lco != null) {
+			i = true;
+			return "pannier";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
+			return "pannier";
 		}
 	}
 
@@ -160,11 +174,11 @@ public class LigneCommandeManagedBean implements Serializable {
 	public String getAllLigneComandeByCo() {
 		this.cl = (Client) maSession.getAttribute("client");
 		try {
-				this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
-				maSession.setAttribute("listlco", this.listelco);
-				for (LigneCommande lco : this.listelco) {
-					this.prixTotal = this.prixTotal + lco.getPrixfinal();
-				}
+			this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
+			maSession.setAttribute("listlco", this.listelco);
+			for (LigneCommande lco : this.listelco) {
+				this.prixTotal = this.prixTotal + lco.getPrixfinal();
+			}
 			i = true;
 			return "pannier";
 		} catch (Exception e) {

@@ -87,7 +87,7 @@ public class CommandeManagedBean implements Serializable{
 			return "acceuil";
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
-			return "deletecommande";
+			return "pannier";
 		}
 	}
 	
@@ -124,5 +124,16 @@ public class CommandeManagedBean implements Serializable{
 			return "getallcommande";
 		}
 		
+	}
+	
+	public String validerCommande() {
+		int verif=coSer.deleteCommande(this.co);
+		if(verif!=0) {
+			i=true;
+			return "acceuil";
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
+			return "pannier";
+		}
 	}
 }
