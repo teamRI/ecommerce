@@ -10,9 +10,9 @@
 </h:head>
 <h:body>
 	<ui:composition>
-		<p:inputText style="position: relative; left:30%"></p:inputText>
+		<p:inputText style="position: relative; left:30%" value="#{prMB.produit.designation}"></p:inputText>
 		<p:commandButton style="position: relative; left:30%" value="search"
-			action="#" />
+			action="#{prMB.getProduitByNom}" />
 		<p:commandButton style="position: relative; left:65%"
 			value="Administrateur" action="/login" />
 		<p:commandLink style="position: relative; left:60%; top: 60px"

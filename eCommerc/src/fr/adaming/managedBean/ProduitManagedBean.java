@@ -214,4 +214,12 @@ public class ProduitManagedBean implements Serializable{
 		return "deleteproduit";
 		}
 		}
+		
+		public String getProduitByNom() {
+			this.produit=prService.getProduitByNom(produit);
+			if(this.produit!=null) {
+				return "produit";
+			}
+			return "acceuil";
+		}
 }

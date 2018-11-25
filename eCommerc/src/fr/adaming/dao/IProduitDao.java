@@ -20,5 +20,7 @@ public interface IProduitDao {
 	
 	public int delateProduit(Produit pr);
 	
+	public Produit getProduitByNom(Produit pr);
+	
 	
 }

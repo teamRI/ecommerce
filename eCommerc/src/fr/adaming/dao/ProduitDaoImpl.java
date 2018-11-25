@@ -76,4 +76,17 @@ public class ProduitDaoImpl implements IProduitDao{
 		
 	}
 
+	@Override
+	public Produit getProduitByNom(Produit pr) {
+String req="SELECT p FROM Produit as p WHERE p.designation=:pDesignation";
+		
+		Query query= em.createQuery(req);
+		
+		query.setParameter("pDesignation", pr.getDesignation());
+		
+		Produit prOut= (Produit) query.getSingleResult();
+		
+		return prOut;
+	}
+
 }

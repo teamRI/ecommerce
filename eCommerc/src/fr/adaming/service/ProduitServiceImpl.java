@@ -44,6 +44,12 @@ public class ProduitServiceImpl implements IProduitService{
 		
 		return prDao.delateProduit(pr);
 	}
+
+	@Override
+	public Produit getProduitByNom(Produit pr) {
+		
+		return prDao.getProduitByNom(pr);
+	}
 	
 
 	
