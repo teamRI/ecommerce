@@ -19,6 +19,7 @@ import org.primefaces.model.UploadedFile;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name="catMB")
 @RequestScoped
@@ -28,6 +29,9 @@ public class CategorieManagedBean implements Serializable{
 	
 	@EJB
 	public ICategorieService catService;
+	
+	@EJB
+	public IProduitService prService;
 	
 	
 	//2************************ATTRIBUTS***********************************************************************************
@@ -43,6 +47,8 @@ public class CategorieManagedBean implements Serializable{
 	private UploadedFile file;
 	
 	private boolean i;
+	
+	private boolean prCat;
 	
 	
 	//3*************************************CONSTRUCTEUR VIDE**************************************************************
@@ -157,9 +163,17 @@ public class CategorieManagedBean implements Serializable{
 	}
 	
 	
+	public boolean isPrCat() {
+		return prCat;
+	}
+
+	public void setPrCat(boolean prCat) {
+		this.prCat = prCat;
+	}
 	
 	//6*****************************************AUTRES METHODES*************************************************************
 	
+
 
 
 
@@ -195,6 +209,10 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 		}
 	}
 	
+	public String upDateLienCategorie() {
+		return "updatecategorie";
+	}
+	
 	public String upDateCategorie() {
 		this.categorie.setPhoto(file.getContents());
 		Categorie cOut= catService.upDateCategorie(this.categorie);
@@ -202,7 +220,7 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 			List<Categorie> list= catService.getAllCategorie();
 			i=true;
 			this.listCategorie=list;
-			return "updatecategorie";
+			return "acceuil";
 		}else {
 			
 			i=false;
@@ -222,5 +240,11 @@ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout n'e
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La categorie n'est pas effacé"));
 			return "deletecategorie";
 		}
+	}
+	
+	public String getListProduits() {
+		prCat=true;
+		this.listProduit= prService.getAllProduit(this.categorie);
+		return "acceuil";
 	}
 }
