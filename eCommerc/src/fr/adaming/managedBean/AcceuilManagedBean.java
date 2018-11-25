@@ -116,7 +116,7 @@ public class AcceuilManagedBean implements Serializable {
 		this.cl = clOut;
 		if (clOut != null) {
 			maSession.setAttribute("listeCo", this.cl.getListeCo());
-			for (int i = 0; i <= this.cl.getListeCo().size(); i++) {
+			for (int i = 0; i <= this.cl.getListeCo().size()-1; i++) {
 				maSession.setAttribute("listlco" + i, cl.getListeCo().get(i).getListelco());
 			}
 			maSession.setAttribute("client", this.cl);

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class Categorie {
 	
 	 //1.1******************Relations*****************************
 	  
-	@OneToMany(mappedBy="pCategorie",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="pCategorie",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	  private List<Produit> listeProduit;
 	  
 	
