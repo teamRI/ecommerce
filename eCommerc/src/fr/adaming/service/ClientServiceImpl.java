@@ -37,12 +37,12 @@ public class ClientServiceImpl implements IClientService {
 	}
 
 	@Override
-	public int isExist(Client c) {
+	public Client isExist(Client c) {
 		Client clOut = clDao.isExist(c);
 		if (clOut != null) {
-			return 1;
+			return clOut;
 		} else {
-			return 0;
+			return null;
 		}
 	}
 }

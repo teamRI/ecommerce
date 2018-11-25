@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +26,7 @@ public class Client {
 	private String email;
 	private String tel;
 	
-	@OneToMany(mappedBy="cl",cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+	@OneToMany(mappedBy="cl",cascade=CascadeType.ALL)
 	private List<Commande> listeCo;
 	
 	//2*************CONSTRUCTEURS***************************************************************
@@ -111,6 +110,18 @@ public class Client {
 
 	public String getTel() {
 		return tel;
+	}
+
+
+
+	public List<Commande> getListeCo() {
+		return listeCo;
+	}
+
+
+
+	public void setListeCo(List<Commande> listeCo) {
+		this.listeCo = listeCo;
 	}
 
 

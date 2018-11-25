@@ -138,15 +138,21 @@ public class LigneCommandeManagedBean implements Serializable{
 	}
 	public String getAllLigneComandeByCo() {
 		this.listelco=lcoSer.getAllLigneCommandeByCo(this.co);
+		try {
 		if(this.listelco!=null) {
+			maSession.setAttribute("listeCo", this.cl.getListeCo());
+			for (int i = 0; i <= this.cl.getListeCo().size(); i++) {
+				maSession.setAttribute("listlco" + i, cl.getListeCo().get(i).getListelco());
+			}
+			maSession.setAttribute("client", this.cl);
 			System.out.println(listelco.get(0).getPr().getId());
 			i=true;
-			return "getalllignecommande";
-		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
-			return "getalllignecommande";
+			return "pannier";
 		}
-		
+		}catch (Exception e) {
+			
+		}
+		return "loginCl";
 	}
 	
 }

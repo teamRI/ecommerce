@@ -15,12 +15,14 @@
 			action="#" />
 		<p:commandButton style="position: relative; left:65%"
 			value="Administrateur" action="/login" />
-		<p:commandLink style="position: relative; left:60%; top: 50px"
-			value="pannier" action="#" />
+		<p:commandLink style="position: relative; left:60%; top: 60px"
+			action="#{lcoMB.getAllLigneComandeByCo}">
+			<p:graphicImage style="width: 50px; heigh: 50px"
+				url="/ressources/images/13364.png" />
+		</p:commandLink>
 		<p:megaMenu style="position: relative; top:50px; margin-top:20px"
-			orientation="horizontal">
-			<p:submenu label="Administrateur" icon="pi pi-check"
-				rendered="#{sessionScope.verifSession}">
+			orientation="horizontal" rendered="#{sessionScope.verifSession}">
+			<p:submenu label="Administrateur" icon="pi pi-check">
 				<p:column>
 					<p:submenu label="client">
 						<p:menuitem value="ajouter" url="addclient.xhtml" />
