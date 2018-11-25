@@ -1,7 +1,5 @@
 package fr.adaming.dao;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -52,7 +50,7 @@ public class CommandeDaoImpl implements ICommandeDao {
 	}
 
 	@Override
-	public List<Commande> getAllCommandeByCl(Client cl) {
+	public Commande getAllCommandeByCl(Client cl) {
 		// ecrire la requette JPQL
 		String req = "SELECT co FROM Commande co WHERE co.cl.id=:pIdCl";
 
@@ -61,8 +59,8 @@ public class CommandeDaoImpl implements ICommandeDao {
 		query.setParameter("pIdCl", cl.getId());
 
 		// recuperation du resultat
-		List<Commande> liste = query.getResultList();
-		return liste;
+		Commande Co = (Commande) query.getSingleResult();
+		return Co;
 	}
 
 }

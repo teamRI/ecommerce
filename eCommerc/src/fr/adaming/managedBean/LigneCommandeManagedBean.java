@@ -158,16 +158,13 @@ public class LigneCommandeManagedBean implements Serializable {
 	}
 
 	public String getAllLigneComandeByCo() {
-		List<Commande> listeCo = (List<Commande>) maSession.getAttribute("listeCo");
 		this.cl = (Client) maSession.getAttribute("client");
 		try {
-			for (int i = 0; i <= listeCo.size() - 1; i++) {
-				this.listelco = lcoSer.getAllLigneCommandeByCo(listeCo.get(i));
-				maSession.setAttribute("listlco" + i, this.listelco);
+				this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
+				maSession.setAttribute("listlco", this.listelco);
 				for (LigneCommande lco : this.listelco) {
 					this.prixTotal = this.prixTotal + lco.getPrixfinal();
 				}
-			}
 			i = true;
 			return "pannier";
 		} catch (Exception e) {

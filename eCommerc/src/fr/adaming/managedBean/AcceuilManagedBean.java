@@ -97,7 +97,6 @@ public class AcceuilManagedBean implements Serializable {
 		for (int j = 0; j <= size; j++) {
 			prodliste = prSer.getAllProduit(catliste.get(j));
 			maSession.setAttribute("prodliste" + j, this.prodliste);
-			maSession.setAttribute("size" + j, this.prodliste.size() - 1);
 		}
 		maSession.setAttribute("catliste", this.catliste);
 		return "acceuil";
@@ -107,10 +106,6 @@ public class AcceuilManagedBean implements Serializable {
 		Client clOut = clSer.isExist(this.cl);
 		this.cl = clOut;
 		if (clOut != null) {
-			maSession.setAttribute("listeCo", this.cl.getListeCo());
-			for (int i = 0; i <= this.cl.getListeCo().size()-1; i++) {
-				maSession.setAttribute("listlco" + i, cl.getListeCo().get(i).getListelco());
-			}
 			maSession.setAttribute("client", this.cl);
 			catliste = caSer.getAllCategorie();
 			maSession.setAttribute("catliste", this.catliste);

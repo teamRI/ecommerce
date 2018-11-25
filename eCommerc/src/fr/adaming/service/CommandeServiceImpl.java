@@ -1,11 +1,8 @@
 package fr.adaming.service;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
-import fr.adaming.dao.IClientDao;
 import fr.adaming.dao.ICommandeDao;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
@@ -38,7 +35,7 @@ public class CommandeServiceImpl implements ICommandeService{
 	}
 
 	@Override
-	public List<Commande> getAllCommandeByCl(Client cl) {
+	public Commande getAllCommandeByCl(Client cl) {
 
 		return coDao.getAllCommandeByCl(cl);
 	}

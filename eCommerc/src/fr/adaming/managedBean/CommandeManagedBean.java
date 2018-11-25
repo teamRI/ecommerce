@@ -28,7 +28,6 @@ public class CommandeManagedBean implements Serializable{
 	private Commande co;
 	private Client cl;
 	private List<LigneCommande> listeLco;
-	private List<Commande> listeco;
 	private boolean i;
 	HttpSession maSession;
 	
@@ -67,15 +66,6 @@ public class CommandeManagedBean implements Serializable{
 	}
 	public void setI(boolean i) {
 		this.i = i;
-	}
-	
-	
-	public List<Commande> getListeco() {
-		return listeco;
-	}
-
-	public void setListeco(List<Commande> listeco) {
-		this.listeco = listeco;
 	}
 
 	public String addCommande() {
@@ -125,9 +115,8 @@ public class CommandeManagedBean implements Serializable{
 		}
 	}
 	public String getAllComandeByCl() {
-		this.listeco=coSer.getAllCommandeByCl(this.cl);
-		if(this.listeco!=null) {
-			System.out.println(listeco.get(1));
+		this.co=coSer.getAllCommandeByCl(this.cl);
+		if(this.co!=null) {
 			i=true;
 			return "getallcommande";
 		}else {

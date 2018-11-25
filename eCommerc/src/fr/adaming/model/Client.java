@@ -9,7 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,8 +27,8 @@ public class Client {
 	private String email;
 	private String tel;
 	
-	@OneToMany(mappedBy="cl",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<Commande> listeCo;
+	@OneToOne(mappedBy="cl",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Commande Co;
 	
 	//2*************CONSTRUCTEURS***************************************************************
 	
@@ -113,35 +113,21 @@ public class Client {
 		return tel;
 	}
 
-
-
-	public List<Commande> getListeCo() {
-		return listeCo;
+	public Commande getCo() {
+		return Co;
 	}
 
-
-
-	public void setListeCo(List<Commande> listeCo) {
-		this.listeCo = listeCo;
+	public void setCo(Commande co) {
+		Co = co;
 	}
-
-
 
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", email=" + email + ", tel=" + tel + "]";
 	}
-	
-	
-	
-	
-	
-	
 
 }
