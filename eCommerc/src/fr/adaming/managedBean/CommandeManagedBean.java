@@ -15,6 +15,7 @@ import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.service.ICommandeService;
+import fr.adaming.service.ILigneCommandeService;
 
 @ManagedBean(name="coMB")
 @RequestScoped
@@ -24,6 +25,9 @@ public class CommandeManagedBean implements Serializable{
 
 	@EJB
 	private ICommandeService coSer;
+	
+	@EJB
+	private ILigneCommandeService lcoSer;
 	
 	private Commande co;
 	private Client cl;
@@ -127,8 +131,14 @@ public class CommandeManagedBean implements Serializable{
 	}
 	
 	public String validerCommande() {
+		List<LigneCommande> listlco= (List<LigneCommande>) maSession.getAttribute("listlco");
+		 for(LigneCommande lco: listlco) {
+			 
+		int verif1= lcoSer.deleteLigneCommande(lco);}
 		int verif=coSer.deleteCommande(this.co);
+		
 		if(verif!=0) {
+			
 			i=true;
 			return "acceuil";
 		}else {

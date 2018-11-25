@@ -29,11 +29,11 @@
 					<h:outputText value="#{lco.pr.designation}" />
 				</p:column>
 
-				<p:column headerText="description">
+				<p:column headerText="quantité">
 					<h:outputText value="#{lco.quantiteCo}" />
 				</p:column>
 
-				<p:column headerText="description">
+				<p:column headerText="prix">
 					<h:outputText value="#{lco.prixfinal}" />
 				</p:column>
 				<p:column headerText="operations">
@@ -44,13 +44,13 @@
 							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
 					</h:commandLink>
 					<h:commandLink action="#{lcoMB.upDatePlusLigneCommande}">
-						<p:graphicImage url="WebContent/ressources/images/plus.jpg"
+						<p:graphicImage url="/ressources/images/plus.jpg"
 							width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{lco.id}"
 							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
 					</h:commandLink>
 					<h:commandLink action="#{lcoMB.upDateMoinsLigneCommande}">
-						<p:graphicImage url="WebContent/ressources/images/moins.jpg"
+						<p:graphicImage url="/ressources/images/moins.jpg"
 							width="30"></p:graphicImage>
 						<f:setPropertyActionListener value="#{lco.id}"
 							target="#{lcoMB.lco.id}"></f:setPropertyActionListener>
@@ -60,7 +60,8 @@
 			<p:outputLabel value="#{lcoMB.prixTotal}"/>
 	</h:form>
 	<h:form>
-	<p:commandButton value="valider" action="#{coMB.validerCommande}"/>
+	<p:commandLink action="#{coMB.validerCommande}" >valider<f:setPropertyActionListener value="#{sessionScope.client.co.id}"
+							target="#{coMB.co.id}"></f:setPropertyActionListener></p:commandLink>
 	<p:commandButton value="annuler la commande" action="#{coMB.deleteCommande}"/>
 	</h:form>
 </h:body>

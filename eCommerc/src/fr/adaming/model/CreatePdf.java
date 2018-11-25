@@ -3,6 +3,9 @@ package fr.adaming.model;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -23,7 +26,7 @@ public class CreatePdf {
 	Client cl;
 	LigneCommande lc;
 	
-	 public void writePdf(OutputStream outputStream) throws Exception {
+	 public String writePdf(OutputStream outputStream) throws Exception {
 	        Document document = new Document();
 	        PdfWriter.getInstance(document, outputStream);
 	         
@@ -38,7 +41,7 @@ public class CreatePdf {
 	    	PdfWriter.getInstance(document, outputStream);
 	    	 document.open();
 	         
-	        document.addTitle("Récapitulatif commande n°"+co.getId());
+	        document.addTitle("Récapitulatif");
 	        document.addSubject("Récapitulatif commande");
 	        document.addKeywords("iText, email");
 	        document.addAuthor("ECommerce");
@@ -135,6 +138,11 @@ public class CreatePdf {
 		}
 	        
 	        document.close();
+	        
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Le PDF a bien été généré"));
+
+			return this.writePdf(outputStream);
+
 	  }   }
 	     
 
