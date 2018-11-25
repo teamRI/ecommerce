@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.ejb.Stateless;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -19,6 +20,7 @@ import javax.mail.internet.MimeMultipart;
 
 import fr.adaming.dao.LigneCommandeDaoImpl;
 
+@Stateless
 public class Mail {
 
 	public static void sendMail(Client cl, Commande co, LigneCommande lc) {

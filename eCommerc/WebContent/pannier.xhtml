@@ -16,7 +16,7 @@
 	</h:form>
 
 	<h:form>
-		<p:outputLabel value="#{sessionScope.client.co.id}">
+		<p:outputLabel value="#{sessionScope.client.co.id}"/>
 			<p:dataTable var="lco" value="#{sessionScope.listlco}">
 				<p:column headerText="ID">
 					<h:outputText value="#{lco.id}" />
@@ -42,8 +42,7 @@
 					</h:commandLink>
 				</p:column>
 			</p:dataTable>
-			<p:outputLabel value="#{lcoMB.prixTotal}">
-
+			
 	</h:form>
 </h:body>
 </html>
