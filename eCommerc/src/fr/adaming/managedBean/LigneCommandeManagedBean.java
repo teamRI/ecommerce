@@ -132,11 +132,17 @@ public class LigneCommandeManagedBean implements Serializable {
 	}
 
 	public String upDatePlusLigneCommande() {
-
+		this.cl = (Client) maSession.getAttribute("client");
 		int q = lcoSer.getLigneCommande(this.lco).getQuantiteCo();
 		this.lco.setQuantiteCo(q + 1);
 		this.lco = lcoSer.upDateLigneCommande(this.lco);
+		System.out.println(q);
 		if (this.lco != null) {
+			this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
+			maSession.setAttribute("listlco", this.listelco);
+			for (LigneCommande lco : this.listelco) {
+				this.prixTotal = this.prixTotal + lco.getPrixfinal();
+			}
 			i = true;
 			return "pannier";
 		} else {
@@ -146,11 +152,17 @@ public class LigneCommandeManagedBean implements Serializable {
 	}
 
 	public String upDateMoinsLigneCommande() {
-
+		this.cl = (Client) maSession.getAttribute("client");
 		int q = lcoSer.getLigneCommande(this.lco).getQuantiteCo();
 		this.lco.setQuantiteCo(q - 1);
 		this.lco = lcoSer.upDateLigneCommande(this.lco);
+		System.out.println(q);
 		if (this.lco != null) {
+			this.listelco = lcoSer.getAllLigneCommandeByCo(cl.getCo());
+			maSession.setAttribute("listlco", this.listelco);
+			for (LigneCommande lco : this.listelco) {
+				this.prixTotal = this.prixTotal + lco.getPrixfinal();
+			}
 			i = true;
 			return "pannier";
 		} else {

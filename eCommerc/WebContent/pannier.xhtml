@@ -62,7 +62,8 @@
 	<h:form>
 	<p:commandLink action="#{coMB.validerCommande}" >valider<f:setPropertyActionListener value="#{sessionScope.client.co.id}"
 							target="#{coMB.co.id}"></f:setPropertyActionListener></p:commandLink>
-	<p:commandButton value="annuler la commande" action="#{coMB.deleteCommande}"/>
+	<p:commandLink action="#{coMB.deleteCommande}" >annuler<f:setPropertyActionListener value="#{sessionScope.client.co.id}"
+							target="#{coMB.co.id}"></f:setPropertyActionListener></p:commandLink>
 	</h:form>
 </h:body>
 </html>

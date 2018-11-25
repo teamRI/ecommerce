@@ -30,11 +30,10 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 
 	@Override
 	public LigneCommande upDateLigneCommande(LigneCommande lco) {
-		lco= lcoDao.getLigneCommande(lco);
-//		Produit pr=prSer.getProduit(lco.getPr(), lco.getPr().getpCategorie());
-//		lco.setPr(pr);
-		lco.setPrixfinal(lco.getPr().getPrix()*lco.getQuantiteCo());
-		return lcoDao.upDateLigneCommande(lco);
+		LigneCommande lco1= lcoDao.getLigneCommande(lco);
+		lco1.setQuantiteCo(lco.getQuantiteCo());
+		lco1.setPrixfinal(lco1.getPr().getPrix()*lco1.getQuantiteCo());
+		return lcoDao.upDateLigneCommande(lco1);
 	}
 
 	@Override
