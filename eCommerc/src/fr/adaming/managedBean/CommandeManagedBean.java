@@ -17,131 +17,146 @@ import fr.adaming.model.LigneCommande;
 import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILigneCommandeService;
 
-@ManagedBean(name="coMB")
+@ManagedBean(name = "coMB")
 @RequestScoped
-public class CommandeManagedBean implements Serializable{
+public class CommandeManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	private ICommandeService coSer;
-	
+
 	@EJB
 	private ILigneCommandeService lcoSer;
-	
+
 	private Commande co;
 	private Client cl;
 	private List<LigneCommande> listeLco;
 	private boolean i;
 	HttpSession maSession;
-	
+
 	public CommandeManagedBean() {
 		super();
 	}
-	
+
 	@PostConstruct
 	public void init() {
-		this.cl=new Client();
-		this.co=new Commande();
-		maSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		i=false;
-		
+		this.cl = new Client();
+		this.co = new Commande();
+		maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		i = false;
+
 	}
+
 	public Commande getCo() {
 		return co;
 	}
+
 	public void setCo(Commande co) {
 		this.co = co;
 	}
+
 	public Client getCl() {
 		return cl;
 	}
+
 	public void setCl(Client cl) {
 		this.cl = cl;
 	}
+
 	public List<LigneCommande> getListeLco() {
 		return listeLco;
 	}
+
 	public void setListeLco(List<LigneCommande> listeLco) {
 		this.listeLco = listeLco;
 	}
+
 	public boolean isI() {
 		return i;
 	}
+
 	public void setI(boolean i) {
 		this.i = i;
 	}
 
 	public String addCommande() {
 		this.co.setCl(this.cl);
-		this.co=coSer.addCommande(this.co);
-		if(co!=null) {
-			i=true;
+		this.co = coSer.addCommande(this.co);
+		if (co != null) {
+			i = true;
 			return "acceuil";
-		}else {
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
 			return "addcommande";
 		}
 	}
-	
+
 	public String deleteCommande() {
-		int verif=coSer.deleteCommande(this.co);
-		if(verif!=0) {
-			i=true;
+		List<LigneCommande> listlco = (List<LigneCommande>) maSession.getAttribute("listlco");
+		for (LigneCommande lco : listlco) {
+
+			int verif1 = lcoSer.deleteLigneCommande(lco);
+		}
+		int verif = coSer.deleteCommande(this.co);
+		if (verif != 0) {
+			i = true;
 			return "acceuil";
-		}else {
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
 			return "pannier";
 		}
 	}
-	
+
 	public String upDateCommande() {
 		this.co.setCl(this.cl);
-		this.co=coSer.upDateCommande(this.co);
-		if(this.co!=null) {
-			i=true;
+		this.co = coSer.upDateCommande(this.co);
+		if (this.co != null) {
+			i = true;
 			return "acceuil";
-		}else {
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué!"));
 			return "updatecommande";
 		}
 	}
 
 	public String getCommande() {
-		this.co=coSer.getCommande(this.co);
-		if(this.co!=null) {
+		this.co = coSer.getCommande(this.co);
+		if (this.co != null) {
 			System.out.println(co);
-			i=true;
+			i = true;
 			return "getcommande";
-		}else {
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
 			return "getcommande";
 		}
 	}
+
 	public String getAllComandeByCl() {
-		this.co=coSer.getAllCommandeByCl(this.cl);
-		if(this.co!=null) {
-			i=true;
+		this.co = coSer.getAllCommandeByCl(this.cl);
+		if (this.co != null) {
+			i = true;
 			return "getallcommande";
-		}else {
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué!"));
 			return "getallcommande";
 		}
-		
+
 	}
-	
+
 	public String validerCommande() {
-		List<LigneCommande> listlco= (List<LigneCommande>) maSession.getAttribute("listlco");
-		 for(LigneCommande lco: listlco) {
-			 
-		int verif1= lcoSer.deleteLigneCommande(lco);}
-		int verif=coSer.deleteCommande(this.co);
-		
-		if(verif!=0) {
-			
-			i=true;
+		List<LigneCommande> listlco = (List<LigneCommande>) maSession.getAttribute("listlco");
+		for (LigneCommande lco : listlco) {
+
+			int verif1 = lcoSer.deleteLigneCommande(lco);
+		}
+		int verif = coSer.deleteCommande(this.co);
+
+		if (verif != 0) {
+
+			i = true;
 			return "acceuil";
-		}else {
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué!"));
 			return "pannier";
 		}
