@@ -21,7 +21,7 @@ import fr.adaming.dao.LigneCommandeDaoImpl;
 
 public class Mail {
 
-	public static void sendMail(Client cl, Commande co, Pannier pa) {
+	public static void sendMail(Client cl, Commande co, LigneCommande lc) {
 		final String username= "conseilleuringrid@gmail.com";
 		final String password= "mclikfnxfzacsyrj";
 		
@@ -72,13 +72,13 @@ public class Mail {
 					
 					// Now set the actual message
 					String recap = "";
-					for (LigneCommande lc : pa.getListeLigneCommandes()) {
-						recap = recap + "\n - " + lc.getQuantiteCo() + " " + lc.getPr().getDesignation()+" à "+lc.getPr().getPrix()+"€ pièce";
+					for (LigneCommande lic : co.getListelco()) {
+						recap = recap + "\n - " + lic.getQuantiteCo() + " " + lic.getPr().getDesignation()+" à "+lic.getPr().getPrix()+"€ pièce";
 					}
 					
 					messageBodyPart.setText("Mr/Mme " + cl.getNom()
 							+ ", \nBonjour,\nNous vous confirmons l'enregistrement de votre commande numéro " + co.getId()
-							+ ".\nRécapitulatif de la commande :" + recap +"\n\nMontant total de la commande :"+ pa.getPrixTotal()+"€"
+							+ ".\nRécapitulatif de la commande :" + recap +"\n\nMontant total de la commande :"+ lc.getPrixfinal()+"€"
 							+ "\n\nVous trouverez le détail de votre facture en pièce jointe au format pdf.\n\n"
 							+ "En espérant vous revoir bientôt sur notre site, cordialement\n\nToute l'équipe de ECommerce");
 
