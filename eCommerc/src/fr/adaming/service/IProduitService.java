@@ -19,5 +19,7 @@ public interface IProduitService {
 		public Produit upDateProduit(Produit pr, Categorie c);
 		
 		public int delateProduit(Produit pr);
+		
+		public Produit getProduitByNom(Produit pr);
 
 }
