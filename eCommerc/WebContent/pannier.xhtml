@@ -71,9 +71,8 @@
 		<p:dataExporter type="pdf" target="formTest:test" fileName="Récapitulatif"/>
 		</f:setPropertyActionListener>
  </h:commandLink>
-	<p:commandLink action="#{coMB.validerCommande}" >valider<f:setPropertyActionListener value="#{sessionScope.client.co.id}"
-							target="#{coMB.co.id}"></f:setPropertyActionListener></p:commandLink>
-	<p:commandLink action="#{coMB.deleteCommande}" >annuler<f:setPropertyActionListener value="#{sessionScope.client.co.id}"
+	
+	<p:commandLink action="#{coMB.deleteCommande}" ><h:graphicImage url="/ressources/images/Trash Can_48px.png" width="40" /><f:setPropertyActionListener value="#{sessionScope.client.co.id}"
 							target="#{coMB.co.id}"></f:setPropertyActionListener></p:commandLink>
 	</h:form>
 </h:body>
