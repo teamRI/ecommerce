@@ -15,9 +15,9 @@
 		</ui:insert>
 	</h:form>
 
-	<h:form>
+	<h:form id="formTest">
 		
-			<p:dataTable var="lco" value="#{sessionScope.listlco}" >
+			<p:dataTable id="test" var="lco" value="#{sessionScope.listlco}" >
 			<f:facet name="header">
             <p:outputLabel value="commande n°#{sessionScope.client.co.id}"/>
         </f:facet>
@@ -59,7 +59,18 @@
 			</p:dataTable>
 			<p:outputLabel value="#{lcoMB.prixTotal}"/>
 	</h:form>
+
+	
 	<h:form>
+	<h:commandLink action="#{coMB.validerCommande}">
+ <h:graphicImage url="/ressources/images/Java_48px.png" width="40" />
+
+ <f:setPropertyActionListener value="#{sessionScope.client.co.id}"
+							target="#{coMB.co.id}">
+							
+		<p:dataExporter type="pdf" target="formTest:test" fileName="Récapitulatif"/>
+		</f:setPropertyActionListener>
+ </h:commandLink>
 	<p:commandLink action="#{coMB.validerCommande}" >valider<f:setPropertyActionListener value="#{sessionScope.client.co.id}"
 							target="#{coMB.co.id}"></f:setPropertyActionListener></p:commandLink>
 	<p:commandLink action="#{coMB.deleteCommande}" >annuler<f:setPropertyActionListener value="#{sessionScope.client.co.id}"

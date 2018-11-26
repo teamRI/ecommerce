@@ -90,7 +90,7 @@ public class Mail {
 
 					// Part two is attachment 
 					messageBodyPart = new MimeBodyPart(); 
-					DataSource source = new FileDataSource("C:\\Users\\inti0490\\Desktop\\Formation\\Workspace\\GenerationPDF\\Test.pdf"); 
+					DataSource source = new FileDataSource("C:\\Users\\inti0490\\Downloads\\Récapitulatif.pdf"); 
 					messageBodyPart.setDataHandler(new DataHandler(source)); 
 					messageBodyPart.setFileName("Récapitulatif commande n°"+co.getId()+".pdf"); 
 					multipart.addBodyPart(messageBodyPart); 
