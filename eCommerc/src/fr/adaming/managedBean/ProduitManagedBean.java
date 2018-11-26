@@ -166,8 +166,8 @@ public class ProduitManagedBean implements Serializable{
 		
 		public String getProduits() {
 //			this.produit.getPhoto;
-			this.produit.setpCategorie(this.categorie);
-			this.produit= prService.getProduit(produit, categorie);
+			
+			this.produit= prService.getProduit(this.produit);
 			
 			if(this.produit!=null) {
 				i=true;

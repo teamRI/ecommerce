@@ -28,7 +28,7 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public Produit getProduit(Produit pr, Categorie c) {
+	public Produit getProduit(Produit pr) {
 		Produit pOut= prDao.getProduit(pr);
 		return pOut;
 	}
