@@ -151,10 +151,11 @@ public class MailManagedBean implements Serializable{
 					// Send message
 					Transport.send(message);
 					System.out.println("Sent message successfully....");
-return ""
+					return"";
 				} catch (MessagingException mex) {
 					mex.printStackTrace();
 				}
+				return null;
 			}
 
 

@@ -1,6 +1,7 @@
 package fr.adaming.managedBean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,7 @@ import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILigneCommandeService;
 
 @ManagedBean(name = "lcoMB")
@@ -25,6 +27,8 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	@EJB
 	private ILigneCommandeService lcoSer;
+	@EJB
+	private ICommandeService coSer;
 
 	private LigneCommande lco;
 	private List<LigneCommande> listelco;
@@ -108,15 +112,35 @@ public class LigneCommandeManagedBean implements Serializable {
 	public String addLigneCommande() {
 		this.cl = (Client) maSession.getAttribute("client");
 		this.co.setCl(this.cl);
-		this.lco.setCo(this.co);
-		this.lco.setPr(this.pr);
-		this.lco = lcoSer.addLigneCommande(this.lco);
-		if (lco != null) {
-			i = true;
-			return "acceuil";
+		if (cl.getCo() != null) {
+			this.lco.setCo(this.co);
+			this.lco.setQuantiteCo(1);
+			this.lco = lcoSer.addLigneCommande(this.lco);
+			if (lco != null) {
+				i = true;
+				return "catetpr";
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+				return "acceuil";
+			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
-			return "acceuil";
+			Date dateAct = new Date();
+			this.co.setDateCommande(dateAct);
+			System.out.println("**************************************");
+			System.out.println(co.getDateCommande());
+			this.co = coSer.addCommande(co);
+			System.out.println("**************************************");
+			System.out.println(co.getId());
+			this.lco.setCo(this.co);
+			this.lco.setQuantiteCo(lco.getQuantiteCo() + 1);
+			this.lco = lcoSer.addLigneCommande(this.lco);
+			if (lco != null) {
+				i = true;
+				return "catetpr";
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué!"));
+				return "acceuil";
+			}
 		}
 	}
 
